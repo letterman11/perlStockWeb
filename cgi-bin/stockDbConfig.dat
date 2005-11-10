@@ -1,0 +1,11 @@
+#---------------------------------------------------
+# Configuration parameters for accessing database 
+#
+#
+#---------------------------------------------------
+
+
+hostname=localhost
+user=abrooks
+password=abrooks
+database=Widgets
