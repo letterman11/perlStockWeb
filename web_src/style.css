@@ -1,0 +1,15 @@
+.results {font-size: 10pt; font-family: arial; align:right}
+.error { color: red; vertical-align: top }
+.tbl_hd { background-color: #B1C5FF; cellspacing:1 text-align: left }
+.tbl_tot { background-color:  #B1C5FF; cellspacing:1 text-align: right }
+.tbl { background-color: white; cellspacing: 1; text-align: left }
+.tbl_bld { cellspacing: 1; text-align: left; font-weight: bold }
+.tbldt { white-space: nowrap; cellspacing: 1; text-align: center }
+.tbldt_ylw { background-color: #FFFF99 ; white-space: nowrap; cellspacing: 1; text-align: center }
+<!-- .tbl_num1 { background-color: #AAAAFF; text-align: right; cellspacing: 1 } -->
+.tbl_num1 { background-color: #D2D2FF; text-align: right; cellspacing: 1 }
+.tbl_num2 { background-color: #E5E5FF; text-align: right; cellspacing: 1 }
+.tbl_num_bld { text-align: right; ; font-weight: bold; cellspacing: 1 }
+.list { color: black; font-size=14; font-family: Arial; align: left  }
+.tableheadingLevel2 {background-color:#DBEBC6;font-size:11px;text-indent:5px;height:16px;vertical-align:middle;}
+.paleyellow { color: #FFFF99 }
