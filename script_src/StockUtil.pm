@@ -1,6 +1,8 @@
 package StockUtil;
 
 use strict;
+use CGI::Cookie;
+
 
 BEGIN
 {
@@ -27,6 +29,7 @@ print <<headerHTML;
 <html>
 <head>
 <title>Angus Test Pages</title>
+<link href="http://192.168.1.101:8080/~abrooks/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 headerHTML
@@ -88,5 +91,25 @@ sub printInputEnv
   
 }
 
+
+sub authenticate()
+{
+  my %cookie_list =  fetch CGI::Cookie;
+  my $id = $cookie_list{'StockApp_ID'}->value;
+  my $reqlist = parseParms();
+
+  
+  return GenLogin->new() unless (defined $id);
+  return Error->new(101) unless (defined $id);
+  
+
+}
+
+sub genID()
+{
+
+
+
+}
 
 1;

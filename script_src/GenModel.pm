@@ -26,7 +26,7 @@ sub genSQL
    $sqlStr   .= " AND order_quantity >= " . $requestParms{'minQty'} if ($requestParms{'minQty'} || $requestParms{'minQty'} eq 0);
    $sqlStr   .= " AND order_quantity <= " . $requestParms{'maxQty'} if ($requestParms{'maxQty'} || $requestParms{'maxQty'} eq 0);
    $self->{SQLSTR} =  $sqlStr;
-   print $sqlStr, "\n";
+   print "<!-- $sqlStr -->\n";
 
 }
 
@@ -42,6 +42,7 @@ sub execQuery
 #   $sth->dump_results(); 
    $dbh->disconnect()
     or warn "Disconnection failed: $DBI::errstr\n"; 
+   return $self->{DBDATAREF};
 }
 
 
