@@ -1,5 +1,3 @@
-
-
 var handle = window.document;
 
 function goSubmit()
@@ -19,7 +17,6 @@ function goSubmit()
 
 }
 
-
 function validateFields()
 {
   if(handle.frmStockApp.stkName.value == "" || handle.frmStockApp.stkName.value == "undefined" || handle.frmStockApp.stkName.value == null ||
@@ -35,8 +32,9 @@ function validateFields()
 
 }
 
-function clearFields()
+function clearFields(handler)
 {
+
   handle.frmStockApp.stkName.value="";
   handle.frmStockApp.minPrice.value="";
   handle.frmStockApp.maxPrice.value="";
@@ -44,42 +42,42 @@ function clearFields()
   handle.frmStockApp.maxQty.value="";
 }
 
-
-function authenticate()
+function server_vallidate(stockAppID)
 {
-
-   var stock_ID
-   stock_ID = getCookieData('stockApp_ID');
-   if (stock_ID.length == 0) || (stock_ID = null) {
-      var url = 
-      document.href = O
-   } else {
-
-
-   }
-
-   document.href= url;
-
+   var url = "http://192.168.1.104:8080/~abrooks/StockApp/cgi-bin/authenticate.cgi?stockSessionID=stockAppID"; 
+   window.location = url;
 }
 
-//stolen cookie function
-function getCookieData(label) 
+function init()
 {
-   var labelLen = label.length
-   var cLen = document.cookie.length
-   var i = 0
-   var cEnd
-   while (i < cLen) {
-       var j = i + labelLen
-       if (document.cookie.substring(i,j) == label) {
-          cEnd = document.cookie.indexOf(";",j)
-	  if (cEnd == -1) {
-	     cEnd = document.cookie.length 
-          } 
-	  return unescape(document.cookie.substring(j,cEnd)
-       }
-       i++
-   }
-   return ""
+   var stock_SessionID;
+   stock_SessionID = getCookieData('stockApp_Session');
+   
+   if ((stock_SessionID == null) || (stock_SessionID.length < stockIDLen)) {
 
-} 
+      document.getElementById('pageheader2').style.visibility='visible';
+      document.getElementById('queryForm').style.visibility='hidden';
+   } else if (stock_SessionID != null) 
+   {
+      server_validate(stock_SessionID);
+   }
+}
+
+function init_old()
+{
+   var stock_ID;
+   stock_ID = getCookieData('stockApp_ID');
+   server_validate(stock_ID);
+   if ((stock_ID != null)  (stock_ID.length < stockIDLen)) {
+
+    document.getElementById('queryForm').style.visibility='visible'
+//      document.getElementById('queryForm').style.visibility='visible'
+//    var url = "http://192.168.1.101:8080/~abrooks/StockApp/cgi-bin/stockReport.cgi?"
+
+   } else {
+
+      document.getElementById('queryForm').style.visibility='visible'
+
+   }
+}
+
