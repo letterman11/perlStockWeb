@@ -8,6 +8,7 @@ use StockUtil;
 use DbConfig;
 use CGI qw /:standard/;
 use CGI::Cookie;
+use CGI::Carp qw(fatalsToBrowser);
 use DBI;
 
 my $userID = 0;
@@ -16,7 +17,6 @@ my $userPass = 2;
 my $startpage="/home/abrooks/www/StockApp/web_src/StockApp.html";
 my $query = new CGI;
 
-open (FH2, ">>/tmp/log.dat") or warn "no open\n";
 
 my $dbconf = DbConfig->new();
 my $dbh = DBI->connect( "dbi:mysql:"  
@@ -26,8 +26,6 @@ my $dbh = DBI->connect( "dbi:mysql:"
 		$dbconf->dbPass() )
         	or die "Cannot Connect to Database $DBI::errstr\n";
 
-my %cookies = fetch CGI::Cookie;
-
 my $user_name = $query->param('userName');
 my $user_pass = $query->param('userPass');
 
@@ -35,7 +33,6 @@ my $sqlstr = "select USER_ID, USER_NAME, USER_PASSWD from user "
 		. " where USER_NAME = '" 
 		. $user_name . "' and  USER_PASSWD = '" . $user_pass .  "'";
   
-print FH2 $sqlstr, "\n";
 my $sth = $dbh->prepare($sqlstr);
 $sth->execute();
 
@@ -61,19 +58,19 @@ if (not defined ($user_row[1])) {
    print "Set-Cookie: $c1\n";
    print "Set-Cookie: $c2\n";
 
-   StockUtil::storeSession($stockSessionID, $user_row[$userName]);
+   StockUtil::storeSession($stockSessionID, 
+			$user_row[$userName]);
 
-   open(FH, "<$startpage") or warn "Cannot open $startpage\n";
+   open(FH, "<$startpage") or 
+		warn "Cannot open $startpage\n";
    my $terminator = $/;
    undef $/;
    my $out_page = <FH>; #slurp file all at once via above line.
    $/ = $terminator;
-
-   StockUtil::headerHttp();
-   
-   print $out_page, "\n";
    close(FH);
+
+   print header;
+   print $out_page, "\n";
 
 }
 
-close FH2;
