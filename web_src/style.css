@@ -1,35 +1,53 @@
 .results {font-size: 10pt; font-family: arial; }
-.form_login { font-size: 8pt; font-family: arial; background-color: #99CCFF }
-.form_query { font-size: 10pt; font-family: arial; }
+.form_login { font-size: 8pt; font-family: arial; background-color: #E3E3E3 }
+.form_query { font-size: 8pt; font-family: arial; background-color: #E3E3E3 }
 .list { color: black; font-size: 14pt; font-family: Arial;   }
 .paleyellow { color: #FFFF99 }
-.paleblue { color: #33CCFF}
+.palegrey { color: #EFEFEF}
+/* .tbl_hd { background-color: #B1C5FF; text-align: center } */
+.tbl_hd { background-color: #E0E0E0; text-align: center } 
+.tbl_num1 { background-color: #D0D0D0; text-align: right }
+.tbl_num2 { background-color: #E8E8E8; text-align: right }
+.tbl_txt { text-align: left }
+/*
+.tbl_num1 { background-color: #D2D2FF; text-align: right }
+.tbl_num2 { background-color: #E5E5FF; text-align: right }
+*/
 
-#pageheader1  {
-
-  top:0;
-  left:0;
-  position:absolute;
-  padding:1%;
-  margin-bottom: 1em
-
+div {
+  display:block;
+  position:relative;
+  float:left;
 }
 
-#pageheader2 {
+#main {
 
-  top:0;
-  right:0;
-  position:absolute;
+  position:relative;
+  max-width:100%;
+  height: 55px;
+}
+
+#banner  {
+
+  margin: 1% 1% 1% 1%;
+  float: left;
+}
+
+#login {
+
   padding:1%;
-  margin-bottom: 1em
-
+  margin-bottom: 1em;
+  float: right;
 }
 
 
 #queryForm {
-  
-  top:1;
-  position:relative;
-  margin-top: 2em;
+}
+
+#testButton {
+
+  top:0;
+  left:0;
+  position: relative;
 
 }

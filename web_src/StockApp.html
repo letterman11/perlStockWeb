@@ -3,38 +3,33 @@
 <HTML>
   <HEAD>
     <TITLE>Stock Query Application</TITLE>
-	<LINK href="style.css" rel="stylesheet" type="text/css">
-	<script language="Javascript1.2" src="validation.js"> </script>
-	<script language="Javascript1.2" src="common.js"> </script>
+	<LINK href="http://192.168.1.104:8080/~abrooks/style.css" rel="stylesheet" type="text/css">
+	<script language="Javascript1.2" src="http://192.168.1.104:8080/~abrooks/validation.js"> </script>
+	<script language="Javascript1.2" src="http://192.168.1.104:8080/~abrooks/common.js"> </script>
  
  </HEAD>
  <BODY onLoad="init()">
 
+<div id="main">
+	<div id="banner">
+  		   <img src="http://192.168.1.104:8080/~abrooks/DCBANNER_CROP2.jpg">
+	</div>
 
-<div id="pageheader1">
-	<table>
-	<tr>
-	<td>
-  	   <img src="DCBANNER.jpg">
-	</td>
-	</tr>
-	</table>
-</div>
-
-<div id="pageheader2">
-  <form name="frmLogin" method="POST" action="../cgi-bin/authenticate.cgi">
-     <table>
-      <tr class="form_login">
-          <td> user name: </td> <td> <input name="userName" type="text"> </td>
-      </tr>
-      <tr class="form_login">
-          <td> password:  </td> <td> <input name="userPass" type="password"> </td>
-      </tr>
-      <tr class="form_login">
-          <td colspan="2"> <input type="submit"> <input type="reset"> </td>
-      </tr>
-      </table>
-  </form>
+	<div id="login" style="visibility:visible">
+	  <form name="frmLogin" method="POST" action="../cgi-bin/authenticate.cgi">
+	     <table>
+	      <tr class="form_login">
+	          <td> user name: </td> <td> <input name="userName" type="text"> </td>
+	      </tr>
+	      <tr class="form_login">
+	          <td> password:  </td> <td> <input name="userPass" type="password"> </td>
+	      </tr>
+	      <tr class="form_login">
+	          <td colspan="2"> <input type="submit"> <input type="reset"> </td>
+	      </tr>
+	      </table>
+	  </form>
+	</div>
 </div>
 
 <div id="queryForm" style="visibility:hidden">
@@ -62,12 +57,12 @@
      </table>
     </form>
 </div>
-
+<!--
 <div id="testButton">
 <a href="javascript: void(document.getElementById('pageheader2').style.visibility='visible');"> Click ON  </a>
 <br>
 <a href="javascript: void(document.getElementById('pageheader2').style.visibility='hidden');"> Click OFF  </a>
 </div>
-
+-->
   </BODY>
 </HTML>
