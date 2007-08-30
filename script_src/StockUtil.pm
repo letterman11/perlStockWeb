@@ -1,6 +1,9 @@
 package StockUtil;
 
 use strict;
+use GenReport;
+use GenError;
+use GenLogin;
 use CGI::Cookie;
 
 
@@ -10,7 +13,7 @@ BEGIN
 
      use vars          qw(@ISA @EXPORT @EXPORT_OK);
      @ISA            = qw(Exporter);
-     @EXPORT         = qw(&headerHttp &headerHtml &validateSession &storeSession &genID);
+     @EXPORT         = qw(&headerHttp &headerHtml &footerHtml &validateSession &storeSession &genID);
      @EXPORT_OK      = qw();
 }
  
@@ -20,31 +23,31 @@ my $false	     = 0;
 
 sub headerHttp
 {
-	print "Content-type:text/html\n\n";
+	return "Content-type:text/html\n\n";
 }
 
 
 sub headerHtml
 {
-print <<headerHTML;
-<html>
-<head>
-<title>Angus Test Pages</title>
-<link href="http://192.168.1.101:8080/~abrooks/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-headerHTML
+	my $buffer_out;
+	$buffer_out = headerHttp();
+	$buffer_out .= "<html>\n"
+   	       .  " <head>\n"
+    	       .  "<title> StockApp</title>\n"
+ 	       .  "<LINK href='http://192.168.1.104:8080/~abrooks/style.css' rel='stylesheet' type='text/css'>\n"
+	       .  "</head>\n"
+	       .  "<body>\n";
+	return $buffer_out;
 
 }
 
 
 sub footerHtml
 {
-print <<footerHTML;
-</body>
-</html>
-footerHTML
-
+	my $buffer_out;
+	$buffer_out = "</body>\n"
+		. "</html>\n";
+	return $buffer_out;
 }
 
 sub dumpEnv 
@@ -92,24 +95,11 @@ sub printInputEnv
   
 }
 
-
-sub authenticate()
-{
-	my %cookie_list =  fetch CGI::Cookie;
-	return GenLogin->new() unless (defined($cookie_list{StockApp_ID}));
-
-	my $id = $cookie_list{'StockApp_ID'}->value;
-	my $reqlist = parseParms();
-  
-	return GenLogin->new() unless (defined $id);
-	return Error->new(101) unless (defined $id);
-}
-
-sub genID
+sub genSessionID
 {
 	my @id_list = qw(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9);
 	my $id;
-	for(my $i = 12; $i > 0; $i--) {
+	for(my $i = 16; $i > 0; $i--) {
 		 $id .= $id_list[int(rand 35)] ;
 	}
 	return $id;
@@ -117,56 +107,58 @@ sub genID
 
 sub storeSession
 {
-   my $sessionID = shift;
-   my $userID = shift;
-   my $sessionFile = "/tmp/stockAppSessions.dat";
-   my %sessionHash = ();
+	my $sessionID = shift;
+	my $userID = shift;
+	my $sessionFile = "/tmp/stockAppSessions.dat";
+	my %sessionHash = ();
 
 
-   open(FH, "$sessionFile") or warn "Cannot open: $sessionFile\n";
-   while (<FH>) {
-      next if /^#*\s*\t*$/; 
-      my ($sessID,$id) = split /\|/;     
-      $sessionHash{$sessID}=$id; 
-   }      
+	open(RFH, "<$sessionFile") or warn "Cannot open (storeSession): $sessionFile\n";
+	while (<RFH>) {
+		next if /^#*\s*\t*$/; 
+		my ($sessID,$id) = split /\|/;     
+		$sessionHash{$sessID}=$id; 
+	}      
 
-   if(defined($sessionHash{$sessionID})) {
-      close FH; 
-      GenError->new()->display();
-   } else
-   {
-      close FH;
-      open (FH, ">>$sessionFile") or warn "Cannot open $sessionFile\n";
-      print FH "$sessionID|$userID\n";
-      close FH;
+	if(defined($sessionHash{$sessionID})) {
+		close RFH; 
+		GenError->new()->display();
+	} else
+	{
+		close RFH;
+		open (WFH, ">>$sessionFile") or warn "Cannot open $sessionFile\n";
+		print WFH "$sessionID|$userID\n";
+		close WFH;
  
-   }
+	}
 
 }
 
 sub validateSession
 {
-   my ($sessionID,$userID)  = @_;
+	my ($sessionID,$userID)  = ();
 
-   if ((not defined $sessionID) || (not defined $userID)) {
-     my %cookies = fetch CGI::Cookie;
-      $sessionID = $cookies{stock_sessionID};
-      $userID = $cookies{userID};
-   }
-   return $false unless (defined $sessionID && defined $userID);   
+	my %cookies = fetch CGI::Cookie;
+	return $false unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});   
 
-   my $sessionFile = "/tmp/stockAppSessions.dat";
-   my %sessionHash = ();
+	$sessionID = $cookies{'stock_SessionID'}->value;
+	$userID = $cookies{'stock_UserID'}->value;
 
-   open(FH, "$sessionFile") or warn "Cannot open: $sessionFile\n";
-   while (<FH>) {
-      next if /^#*\s*\t*$/;
-      my ($sessID,$id) = split /\|/;
-      return $true if $sessionID == $sessID && $userID == $id; 
-      #$sessionHash{$sessID}=$id;
-   }
-   return $false;
+	my $sessionFile = "/tmp/stockAppSessions.dat";
+	my %sessionHash = ();
+
+	open(FH, "<$sessionFile") or warn "Cannot open (validate): $sessionFile\n";
+	while (<FH>) {
+		next if /^#*\s*\t*$/;
+		my ($sessID,$id) = split /\|/;
+		chomp($sessID,$id);
+		return $true if (($sessionID eq $sessID) && ($userID eq $id)); 
+	}
+	close FH;
+   
+	return $false;
 
 
 }
+
 1;
