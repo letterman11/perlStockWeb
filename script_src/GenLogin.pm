@@ -30,7 +30,7 @@ sub display
    $out_buffer = <<"OUT_HTML";
 <div id="main">
         <div id="banner">
-                   <img src="http://192.168.1.104:8080/~abrooks/DCBANNER_CROP2.jpg">
+                   <img src="/~abrooks/DCBANNER_CROP2.jpg">
         </div>
 
         <div id="login" style="visibility:visible">

@@ -34,7 +34,7 @@ sub headerHtml
 	$buffer_out .= "<html>\n"
    	       .  " <head>\n"
     	       .  "<title> StockApp</title>\n"
- 	       .  "<LINK href='http://192.168.1.104:8080/~abrooks/style.css' rel='stylesheet' type='text/css'>\n"
+ 	       .  "<LINK href='http://192.168.1.100:8080/~abrooks/style.css' rel='stylesheet' type='text/css'>\n"
 	       .  "</head>\n"
 	       .  "<body>\n";
 	return $buffer_out;
@@ -99,11 +99,24 @@ sub genSessionID
 {
 	my @id_list = qw(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9);
 	my $id;
-	for(my $i = 16; $i > 0; $i--) {
+	for(my $i = 0; $i < 16; $i++) {
 		 $id .= $id_list[int(rand 35)] ;
 	}
 	return $id;
 }
+
+
+sub genQueryID
+{
+        my @id_list = qw(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9);
+        my $id;
+        for(my $i = 0; $i < 5; $i++) {
+                 $id .= $id_list[int(rand 35)] ;
+        }
+        return $id;
+}
+
+
 
 sub storeSession
 {
