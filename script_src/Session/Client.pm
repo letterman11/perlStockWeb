@@ -74,3 +74,8 @@ sub setQueryID
 	
 	$self->{$sessID}->{QueryID} = $qID;
 }
+
+
+
+
+1;
