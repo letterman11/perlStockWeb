@@ -2,6 +2,16 @@ package Error;
 
 use strict;
 
+BEGIN
+{
+     require         Exporter;
+
+     use vars          qw(@ISA @EXPORT @EXPORT_OK);
+     @ISA            = qw(Exporter);
+     @EXPORT         = qw($true);
+     @EXPORT_OK      = qw();
+}
+
 my $true             = 1;
 my $false            = 0;
 
