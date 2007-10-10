@@ -1,10 +1,12 @@
 package StockUtil;
 
 use strict;
+use Error;
 use GenReport;
 use GenError;
 use GenLogin;
 use CGI::Cookie;
+use Session::Client;
 
 
 BEGIN
@@ -147,6 +149,17 @@ sub storeSession
 
 }
 
+sub storeSession2
+{
+	my $sessionID = shift;
+	my $userID = shift;
+
+	my $Session = Session::Client->new();
+	$Session->setSessionID($sessionID, $userID);
+
+}
+
+
 sub validateSession
 {
 	my ($sessionID,$userID)  = ();
@@ -171,6 +184,27 @@ sub validateSession
    
 	return $false;
 
+
+}
+
+sub validateSession2
+{
+        my ($sessID,$userID)  = ();
+
+        my %cookies = fetch CGI::Cookie;
+        return $false unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});
+
+        $sessID = $cookies{'stock_SessionID'}->value;
+        $userID = $cookies{'stock_UserID'}->value;
+
+
+	my $Session = Session::Client->new();
+
+	my $retStatus = $Session->validateSessionID($sessID);
+
+	return $false if ref $retStatus eq 'Error'; 
+	
+	return $true;
 
 }
 
