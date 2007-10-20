@@ -36,7 +36,7 @@ sub headerHtml
 	$buffer_out .= "<html>\n"
    	       .  " <head>\n"
     	       .  "<title> StockApp</title>\n"
- 	       .  "<LINK href='http://192.168.1.100:8080/~abrooks/style.css' rel='stylesheet' type='text/css'>\n"
+ 	       .  "<LINK href='/~abrooks/style.css' rel='stylesheet' type='text/css'>\n"
 	       .  "</head>\n"
 	       .  "<body>\n";
 	return $buffer_out;
@@ -151,10 +151,11 @@ sub storeSession
 
 sub storeSession2
 {
+	my $sessionInstance = shift;
 	my $sessionID = shift;
 	my $userID = shift;
 
-	my $Session = Session::Client->new();
+	my $Session = Session::Client->new($sessionInstance);
 	$Session->setSessionID($sessionID, $userID);
 
 }
@@ -189,22 +190,31 @@ sub validateSession
 
 sub validateSession2
 {
-        my ($sessID,$userID)  = ();
+        my ($instance,$sessID,$userID)  = ();
 
         my %cookies = fetch CGI::Cookie;
         return $false unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});
 
+        $instance = $cookies{'Instance'}->value;
         $sessID = $cookies{'stock_SessionID'}->value;
         $userID = $cookies{'stock_UserID'}->value;
 
 
-	my $Session = Session::Client->new();
+	my $Session = Session::Client->new($instance);
 
 	my $retStatus = $Session->validateSessionID($sessID);
 
 	return $false if ref $retStatus eq 'Error'; 
 	
 	return $true;
+
+}
+
+sub getSessionInstance
+{
+	my $sInstancePre = 'ses';
+  	my @numInstances = qw( 0 1 2 3 4 5 6 7 8 9 ); 
+	return $sInstancePre . int(rand(scalar(@numInstances)));
 
 }
 
