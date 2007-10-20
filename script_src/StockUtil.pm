@@ -7,7 +7,7 @@ use GenError;
 use GenLogin;
 use CGI::Cookie;
 use Session::Client;
-
+require '../cgi-bin/config.pl'; # temporary will go away
 
 BEGIN
 {
@@ -213,7 +213,8 @@ sub validateSession2
 sub getSessionInstance
 {
 	my $sInstancePre = 'ses';
-  	my @numInstances = qw( 0 1 2 3 4 5 6 7 8 9 ); 
+  #	my @numInstances = qw( 0 1 2 3 4 5 6 7 8 9 ); 
+	my @numInstances = @{$::SESSION_CONFIG->{INSTANCES}};
 	return $sInstancePre . int(rand(scalar(@numInstances)));
 
 }
