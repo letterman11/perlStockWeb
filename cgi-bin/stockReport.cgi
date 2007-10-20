@@ -7,12 +7,13 @@ use StockUtil;
 use GenModel;
 use Error;
 use CGI qw (:standard);
+use CGI::Carp qw(fatalsToBrowser);
 
 
 my $query = new CGI;
 my %params = $query->Vars;
 
-if(StockUtil::validateSession()) {
+if(StockUtil::validateSession2()) {
 
    my $model = GenModel->new(\%params);
    $model->genSQL();

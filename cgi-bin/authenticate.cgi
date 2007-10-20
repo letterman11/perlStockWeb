@@ -47,6 +47,8 @@ if (not defined ($user_row[1])) {
 {
    my $stockSessionID = StockUtil::genSessionID();
 
+   my $sessionInstance = StockUtil::getSessionInstance();
+
    my $c1 = new CGI::Cookie(-name=>'stock_SessionID',
 			-value=>$stockSessionID,
 			-path=>'/');
@@ -55,11 +57,17 @@ if (not defined ($user_row[1])) {
 			-value=>$user_name,
 			-path=>'/');
 
+   my $c3 = new CGI::Cookie(-name=>'Instance',
+			-value=>$sessionInstance,
+			-path=>'/');
+
    print "Set-Cookie: $c1\n";
    print "Set-Cookie: $c2\n";
+   print "Set-Cookie: $c3\n";
 
-   StockUtil::storeSession($stockSessionID, 
-			$user_row[$userName]);
+   StockUtil::storeSession2($sessionInstance,
+				$stockSessionID, 
+				$user_row[$userName]);
 
    open(FH, "<$startpage") or 
 		warn "Cannot open $startpage\n";
