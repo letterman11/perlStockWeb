@@ -12,7 +12,7 @@ my %default_options = (
      create    => 0,
      exclusive => 0,
      mode      => 0666,
-     destroy   => 0,
+     destroy   => 'yes',
      );
 
 my %sessionHash = ();
@@ -20,11 +20,12 @@ my %sessionHash = ();
 sub new
 {
 	my $class = shift; 
+	my $sessionInstance = shift;
 	my $self = \%sessionHash; 
 	
 	#%default_options = %{shift()} if defined(@_);	
 		
-	tie %sessionHash, 'IPC::Shareable', $glue, { %default_options } or
+	tie %sessionHash, 'IPC::Shareable', $sessionInstance, { %default_options } or
      	die "client: tie failed\n";
 		
 	bless $self, $class;
