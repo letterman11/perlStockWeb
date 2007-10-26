@@ -1,20 +1,20 @@
 package Session::Client;
 
 use strict;
-#use lib "/home/abrooks/www/StockApp/script_src"; # temporary use...will go away
 use lib "../../script_src"; # temporary use...will go away
 use IPC::Shareable;
 use Error;
-
+use LOGGER;
+use Data::Dumper;
 
 my $glue='sess';
 my %default_options = (
      create    => 0,
      exclusive => 0,
      mode      => 0666,
-     destroy   => 'yes',
-     );
-
+     destroy   => 0, # !!!!!!!!!!!!!!!! changed from 0 to yes to test !!!!!!!!!!!!  #
+     );			 # still testing IPC module. not very well documented..seems slower than it should be
+			 # could be the old linux box.
 my %sessionHash = ();
 
 sub new
@@ -25,8 +25,10 @@ sub new
 	
 	#%default_options = %{shift()} if defined(@_);	
 		
-	tie %sessionHash, 'IPC::Shareable', $sessionInstance, { %default_options } or
+	my $var = ();
+	$var = tie %sessionHash, 'IPC::Shareable', $sessionInstance, { %default_options } or
      	die "client: tie failed\n";
+	LOGGER::LOG("TIE ** $sessionInstance $var ** TIE");
 		
 	bless $self, $class;
 	return $self;	
@@ -39,8 +41,7 @@ sub setSessionID
 	my $sessID = shift;
 	my $userID = shift;
 
-	$self->{$sessID} = {};
-	$self->{$sessID}->{userID} = $userID;
+	$self->{$sessID} = ();
 
 }
 
@@ -58,12 +59,28 @@ sub getSessionObject
 {
         my $self = shift();
         my $sessionID = shift();
+	#LOGGER::LOG("<<<<<<<<<<<< $sessionID >>>>>>>>>>>>>>>>>>>");
+	#LOGGER::LOG("<<<<<<<<<<<< $self->{$sessionID} >>>>>>>>>>>>>>>>>>>");
+	#LOGGER::LOG(Dumper($self->{$sessionID}));
         return Error->new(105) unless exists $self->{$sessionID}
-                        and exists $self->{$sessionID}->{OBJECTREF};
-        return $self->{$sessionID}->{OBJECTREF};
+                        and defined $self->{$sessionID};
+        return $self->{$sessionID};
 
 }
 
+sub setSessionObject
+{
+	my $self = shift;
+	die if scalar(@_) < 2;
+	my $sessionID = shift;
+	my $sessObj = shift;
+	$self->{$sessionID} = $sessObj;
+
+#	LOGGER::LOG("** setSessionObject **");
+#	LOGGER::LOG(Dumper($self->{$sessionID}));
+#	LOGGER::LOG("** setSessionObject **");
+
+}
 
 sub setQueryID
 {
