@@ -7,6 +7,8 @@ use GenError;
 use GenLogin;
 use CGI::Cookie;
 use Session::Client;
+use LOGGER;
+use Data::Dumper;
 require '../cgi-bin/config.pl'; # temporary will go away
 
 BEGIN
@@ -50,16 +52,6 @@ sub footerHtml
 	$buffer_out = "</body>\n"
 		. "</html>\n";
 	return $buffer_out;
-}
-
-sub dumpEnv 
-{
-	my %envHash		= %{shift()};
-	my ($key,$value)	= ""; 
-	while (($key,$value) = each %envHash) {
-		 print "$key=$value\n";
-	} 
-  
 }
 
 
@@ -185,35 +177,49 @@ sub validateSession
    
 	return $false;
 
-
 }
 
 sub validateSession2
 {
+	#my %parms = %{shift()} if defined (@_);
         my ($instance,$sessID,$userID)  = ();
-
         my %cookies = fetch CGI::Cookie;
-        return $false unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});
+
+        return $false unless (defined $cookies{'Instance'} && 
+					defined $cookies{'stock_SessionID'} &&
+					    defined $cookies{'stock_UserID'});
 
         $instance = $cookies{'Instance'}->value;
         $sessID = $cookies{'stock_SessionID'}->value;
         $userID = $cookies{'stock_UserID'}->value;
 
-
 	my $Session = Session::Client->new($instance);
+	my $retStatusObj = $Session->validateSessionID($sessID);
 
-	my $retStatus = $Session->validateSessionID($sessID);
+	return $false if ref $retStatusObj eq 'Error'; 
 
-	return $false if ref $retStatus eq 'Error'; 
-	
-	return $true;
+	$retStatusObj = $Session->getSessionObject($sessID);
+
+	return ($retStatusObj,$instance,$sessID); # Error object returned if no SessionObject found
+			   # otherwise SessionObject reference returned, instance, and session always returned
+
+}
+
+sub storeSessionObject
+{
+	my $sessionObject = shift;
+	my $Session = Session::Client->new($sessionObject->{INSTANCE});
+	LOGGER::LOG("*** $sessionObject->{INSTANCE} **** : STOCKUTIL");
+	LOGGER::LOG("$sessionObject->{SESSIONID} ---- $sessionObject : STOCKUTIL");
+	$Session->setSessionObject($sessionObject->{SESSIONID},$sessionObject);
+	my $s = $Session->getSessionObject($sessionObject->{SESSIONID});
+#	LOGGER::LOG(Dumper($s . " :storeSessionObject"));
 
 }
 
 sub getSessionInstance
 {
 	my $sInstancePre = 'ses';
-  #	my @numInstances = qw( 0 1 2 3 4 5 6 7 8 9 ); 
 	my @numInstances = @{$::SESSION_CONFIG->{INSTANCES}};
 	return $sInstancePre . int(rand(scalar(@numInstances)));
 

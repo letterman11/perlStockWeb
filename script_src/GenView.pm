@@ -1,40 +1,28 @@
 package GenView;
 
 use strict;
-use GenReport;
-use GenError;
-use GenLogin;
 
 
 my %classHash = (
-		#	DATAREF => undef,
-			ERRCODE => undef,
-			AUTHLIST => undef,
-			OBJECT_CALL => undef,
+			DATAREF  => undef,
+			ROWCOUNT => undef, 
+			ERRCODE  => undef,
 		);
 
 sub new
 {
 	my $proto = shift;
-	my $self = {};
+	my $self = \%classHash;
 	my $class = ref($proto) || $proto;
+	$self->{DATAREF} = shift;
+	$self->{ROWCOUNT} = shift;
+	$self->{ERRCODE} = shift if defined(@_);	
 	bless ($self,$class);
 	return $self;
 
 }
 
-sub stockHeaderHtml
-{
-	print "\n<tr><th> GenView TA NUMBER </th><th> STOCK SYMBOL</th><th> LIMIT PRICE </th><th> ORDER QUANTITY </th> </tr>\n";
 
-}
-
-
-sub display
-{
-	my $self = shift(); 
-
-}
 
 
 

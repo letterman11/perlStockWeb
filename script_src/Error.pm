@@ -8,7 +8,7 @@ BEGIN
 
      use vars          qw(@ISA @EXPORT @EXPORT_OK);
      @ISA            = qw(Exporter);
-     @EXPORT         = qw($true);
+     @EXPORT         = qw($true $false);
      @EXPORT_OK      = qw();
 }
 

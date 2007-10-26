@@ -51,7 +51,13 @@ sub dbPass
 	my $self = shift;
 	return $self->{'password'};
 } 
-   
+
+sub rowsPerPage
+{
+	my $self = shift;
+	return $self->{'rowsperpage'};
+
+}   
 
 
 
