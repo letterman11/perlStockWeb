@@ -18,7 +18,7 @@ sub new
 	my $mModel = shift;
 	$self->{DATA} = $mModel->{DATAREF}; 
 	$self->{ROWCOUNT} = $mModel->{ROWCOUNT};
-	$self->{ROWSPERPAGE} = shift || 35;	
+	$self->{ROWSPERPAGE} = ${%{$mModel->{PARMS}}}{rowsPerPage} || 35;	
 	bless ($self,$class);
 }
 
@@ -87,7 +87,7 @@ sub genNavigation
 		$buffer_out  = "\n<table boder=0 align=left>";
 		$buffer_out .= "<tr><td>Page(s)</td> ";
 		do {
-			$buffer_out .= "<td><A HREF=/cgi-bin/stockReportDetail.cgi?page=" . $pgCnt . ">" .  $pgCnt . "</A></td>";
+			$buffer_out .= "<td><A HREF=/cgi-bin/stockReportDetail.cgi?page=" . $pgCnt .  "&rowsPerPage=" . $rowsPerPage . ">" .  $pgCnt . "</A></td>";
 			$currCnt += $rowsPerPage;
 			$pgCnt++;
 		}while($currCnt < $totRows);

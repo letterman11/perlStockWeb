@@ -25,7 +25,7 @@ sub genSQL
 		my $sessObj = shift;
 		my %requestParms = %{$self->{PARMS}};
 		my $page = defined $requestParms{page} ?  $requestParms{page} : 1 ;
-		my $rowsPerPage = $requestParms{'rowsPerPage'} if defined $requestParms{'rowsPerPage'};
+		my $rowsPerPage = $requestParms{rowsPerPage} if defined $requestParms{rowsPerPage};
 		$rowsPerPage = $rowsPerPage || 35;
 		$self->{ROWCOUNT} = scalar(@{$sessObj->{DATA}});
 		my $data = ();
@@ -93,6 +93,7 @@ sub execIndexQuery
         my $time11 = new Benchmark;
         my $timedd = timediff($time11, $time00);
         my $tstr =  timestr($timedd);
+
         LOGGER::LOG(" ====================");
         LOGGER::LOG(" ======== Timer: $tstr ======");
         LOGGER::LOG(" =====================");
@@ -116,16 +117,20 @@ sub execQuery
         my $self = shift();
         my $dbconf = DbConfig->new();
         my $dbh = DBI->connect( "dbi:mysql:" . $dbconf->dbName() . ":"
-                . $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass() )
-                or die "Cannot Connect to Database $DBI::errstr\n";
+	                . $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass() )
+       			         or die "Cannot Connect to Database $DBI::errstr\n";
+
         my $sth = $dbh->prepare($self->{SQLSTR});
+
 	LOGGER::LOG("$self->{SQLSTR} : EXECQUERY" );
+
         $sth->execute();
         $self->{DATAREF} = $sth->fetchall_arrayref();
 	$self->{ROWCOUNT2} = $sth->rows;
-        #   $sth->dump_results();
+
         $dbh->disconnect()
                 or warn "Disconnection failed: $DBI::errstr\n";
+
         return $self->{DATAREF};
 }
 
