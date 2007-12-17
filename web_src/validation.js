@@ -9,7 +9,9 @@ function goSubmit()
         url += "stkName=" +escape(handle.frmStockApp.stkName.value) + "&minPrice=" +handle.frmStockApp.minPrice.value + "&maxPrice=" +handle.frmStockApp.maxPrice.value
 	  + "&minQty=" +handle.frmStockApp.minQty.value + "&maxQty=" +handle.frmStockApp.maxQty.value + "&rowsPerPage=" +handle.frmStockApp.rowsPerPage.value;
 
-      window.open(url);
+	//document.getElementsByTagName('iframe')[0].src = url;
+	document.getElementById('queryResult').src = url;
+//      window.open(url);
    }
 
 }
@@ -49,6 +51,7 @@ function init()
    if ((stock_SessionID != null) && (stock_SessionID.length >= stockIDLen)) {
       document.getElementById('login').style.visibility='hidden';
       document.getElementById('queryForm').style.visibility='visible';
+      document.getElementById('query').style.visibility='visible';
    }  
 }
 
