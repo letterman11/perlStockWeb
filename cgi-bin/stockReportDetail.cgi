@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl -wT
 
 use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
@@ -17,25 +17,25 @@ my $sessID = ();
 my $query = new CGI;
 my %params = $query->Vars;
 
-($callObj) = StockUtil::validateSession2();
+($callObj) = StockUtil::validateSession();
 
 
 if (ref $callObj eq 'SessionObject') { 
   
-  my $model = GenModel->new(\%params);
+	my $model = GenModel->new(\%params);
 
-  $model->genSQL($callObj);
+	$model->genSQL($callObj);
 
-  $model->execQuery(); 
+	$model->execQuery(); 
 
-  my $view = GenReport->new($model);
+	my $view = GenReport->new($model);
 
-  $view->display2();
+	$view->display2();
 
 
 } else {
  
-   GenLogin->new()->display();
+	GenLogin->new()->display();
 
 }
 

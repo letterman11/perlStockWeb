@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl -wT
 
 use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
@@ -14,18 +14,17 @@ use Data::Dumper;
 my $sessInst = ();
 my $sessID = ();
 my $userID = ();
+my $initSessionObject = ();
 my $query = new CGI;
 my %params = $query->Vars;
-my %cookies = fetch CGI::Cookie;
 
+$initSessionObject = StockUtil::validateSession();
 
-if (defined $cookies{'Instance'} &&
-                              defined $cookies{'stock_SessionID'} &&
-                                    defined $cookies{'stock_UserID'})  {
+if (ref $initSessionObject eq 'SessionObject') { 
 
-       $sessInst = $cookies{'Instance'}->value;
-       $sessID = $cookies{'stock_SessionID'}->value;
-       $userID = $cookies{'stock_UserID'}->value;
+       $sessInst = $initSessionObject->{INSTANCE};
+       $sessID =  $initSessionObject->{SESSIONID};
+	#$userID = $cookies{'stock_UserID'}->value;
     
        my $model = GenModel->new(\%params);
     
@@ -36,7 +35,6 @@ if (defined $cookies{'Instance'} &&
     					 $data,
     					 $rowcount);
     
-#       LOGGER::LOG("$sessInst ______ $sessID  ______ $data ____ $rowcount");
        StockUtil::storeSessionObject($sessionObject);
     
        $model->genSQL($sessionObject);

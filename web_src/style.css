@@ -4,6 +4,7 @@
 .list { color: black; font-size: 14pt; font-family: Arial;   }
 .paleyellow { color: #FFFF99 }
 .palegrey { color: #EFEFEF}
+.errtext { color: red; font-size: 8pt }
 /* .tbl_hd { background-color: #B1C5FF; text-align: center } */
 .tbl_hd { background-color: #E0E0E0; text-align: center } 
 .tbl_num1 { background-color: #D0D0D0; text-align: right }

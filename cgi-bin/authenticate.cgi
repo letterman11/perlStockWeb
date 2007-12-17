@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl -wT
 
 use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
@@ -42,43 +42,43 @@ $sth->finish();
 $dbh->disconnect();
 
 if (not defined ($user_row[1])) {
-   GenLogin->new()->display();	
+	GenLogin->new()->display();	
 } else
 {
-   my $stockSessionID = StockUtil::genSessionID();
+	my $stockSessionID = StockUtil::genSessionID();
 
-   my $sessionInstance = StockUtil::getSessionInstance();
+	my $sessionInstance = "ses1";
 
-   my $c1 = new CGI::Cookie(-name=>'stock_SessionID',
+	my $c1 = new CGI::Cookie(-name=>'stock_SessionID',
 			-value=>$stockSessionID,
 			-path=>'/');
 
-   my $c2 = new CGI::Cookie(-name=>'stock_UserID',
+	my $c2 = new CGI::Cookie(-name=>'stock_UserID',
 			-value=>$user_name,
 			-path=>'/');
 
-   my $c3 = new CGI::Cookie(-name=>'Instance',
+	my $c3 = new CGI::Cookie(-name=>'Instance',
 			-value=>$sessionInstance,
 			-path=>'/');
 
-   print "Set-Cookie: $c1\n";
-   print "Set-Cookie: $c2\n";
-   print "Set-Cookie: $c3\n";
+	print "Set-Cookie: $c1\n";
+	print "Set-Cookie: $c2\n";
+	print "Set-Cookie: $c3\n";
 
-   StockUtil::storeSession2($sessionInstance,
+	StockUtil::storeSession($sessionInstance,
 				$stockSessionID, 
 				$user_row[$userName]);
 
-   open(FH, "<$startpage") or 
+	open(FH, "<$startpage") or 
 		warn "Cannot open $startpage\n";
-   my $terminator = $/;
-   undef $/;
-   my $out_page = <FH>; #slurp file all at once via above line.
-   $/ = $terminator;
-   close(FH);
+	my $terminator = $/;
+	undef $/;
+	my $out_page = <FH>; #slurp file all at once via above line.
+	$/ = $terminator;
+	close(FH);
 
-   print header;
-   print $out_page, "\n";
+	print header;
+	print $out_page, "\n";
 
 }
 

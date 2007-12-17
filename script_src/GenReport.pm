@@ -18,7 +18,7 @@ sub new
 	my $mModel = shift;
 	$self->{DATA} = $mModel->{DATAREF}; 
 	$self->{ROWCOUNT} = $mModel->{ROWCOUNT};
-	$self->{ROWSPERPAGE} = ${%{$mModel->{PARMS}}}{rowsPerPage} || 35;	
+	$self->{ROWSPERPAGE} = $mModel->{PARMS}->{rowsPerPage} || 35;	
 	bless ($self,$class);
 }
 

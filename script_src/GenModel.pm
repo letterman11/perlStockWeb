@@ -44,13 +44,13 @@ sub genSQL
 		}
 		
 
-#		carp(Dumper($sessObj->{DATA}));
+		carp(Dumper($sessObj->{DATA}));
 		carp("$i ########### $j");
 				
-		$data = ${@{$sessObj->{DATA}}}[$i];
+		$data = $sessObj->{DATA}->[$i];
 		$sqlStr .= " '$data' ";
 		for(++$i; $i < $j; $i++) {
-			$data = ${@{$sessObj->{DATA}}}[$i];
+			$data = $sessObj->{DATA}->[$i];
 			$sqlStr .= ", '$data'"; 
 		}
 
