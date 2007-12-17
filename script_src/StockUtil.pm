@@ -5,10 +5,11 @@ use Error;
 use GenReport;
 use GenError;
 use GenLogin;
+use SessionObject;
 use CGI::Cookie;
-use Session::Client;
-use LOGGER;
+use Storable;
 use Data::Dumper;
+require Session::Client;
 require '../cgi-bin/config.pl'; # temporary will go away
 
 BEGIN
@@ -114,106 +115,15 @@ sub genQueryID
 
 sub storeSession
 {
-	my $sessionID = shift;
-	my $userID = shift;
-	my $sessionFile = "/tmp/stockAppSessions.dat";
-	my %sessionHash = ();
-
-
-	open(RFH, "<$sessionFile") or warn "Cannot open (storeSession): $sessionFile\n";
-	while (<RFH>) {
-		next if /^#*\s*\t*$/; 
-		my ($sessID,$id) = split /\|/;     
-		$sessionHash{$sessID}=$id; 
-	}      
-
-	if(defined($sessionHash{$sessionID})) {
-		close RFH; 
-		GenError->new()->display();
-	} else
-	{
-		close RFH;
-		open (WFH, ">>$sessionFile") or warn "Cannot open $sessionFile\n";
-		print WFH "$sessionID|$userID\n";
-		close WFH;
- 
-	}
-
-}
-
-sub storeSession2
-{
 	my $sessionInstance = shift;
 	my $sessionID = shift;
 	my $userID = shift;
+	my $sessionObject = SessionObject->new($sessionInstance,
+                                         $sessionID,
+                                         (),
+                                         ());
 
-	my $Session = Session::Client->new($sessionInstance);
-	$Session->setSessionID($sessionID, $userID);
-
-}
-
-
-sub validateSession
-{
-	my ($sessionID,$userID)  = ();
-
-	my %cookies = fetch CGI::Cookie;
-	return $false unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});   
-
-	$sessionID = $cookies{'stock_SessionID'}->value;
-	$userID = $cookies{'stock_UserID'}->value;
-
-	my $sessionFile = "/tmp/stockAppSessions.dat";
-	my %sessionHash = ();
-
-	open(FH, "<$sessionFile") or warn "Cannot open (validate): $sessionFile\n";
-	while (<FH>) {
-		next if /^#*\s*\t*$/;
-		my ($sessID,$id) = split /\|/;
-		chomp($sessID,$id);
-		return $true if (($sessionID eq $sessID) && ($userID eq $id)); 
-	}
-	close FH;
-   
-	return $false;
-
-}
-
-sub validateSession2
-{
-	#my %parms = %{shift()} if defined (@_);
-        my ($instance,$sessID,$userID)  = ();
-        my %cookies = fetch CGI::Cookie;
-
-        return $false unless (defined $cookies{'Instance'} && 
-					defined $cookies{'stock_SessionID'} &&
-					    defined $cookies{'stock_UserID'});
-
-        $instance = $cookies{'Instance'}->value;
-        $sessID = $cookies{'stock_SessionID'}->value;
-        $userID = $cookies{'stock_UserID'}->value;
-
-	my $Session = Session::Client->new($instance);
-	my $retStatusObj = $Session->validateSessionID($sessID);
-
-	return $false if ref $retStatusObj eq 'Error'; 
-
-	$retStatusObj = $Session->getSessionObject($sessID);
-
-	return ($retStatusObj,$instance,$sessID); # Error object returned if no SessionObject found
-			   # otherwise SessionObject reference returned, instance, and session always returned
-
-}
-
-sub storeSessionObject
-{
-	my $sessionObject = shift;
-	my $Session = Session::Client->new($sessionObject->{INSTANCE});
-	LOGGER::LOG("*** $sessionObject->{INSTANCE} **** : STOCKUTIL");
-	LOGGER::LOG("$sessionObject->{SESSIONID} ---- $sessionObject : STOCKUTIL");
-	$Session->setSessionObject($sessionObject->{SESSIONID},$sessionObject);
-	my $s = $Session->getSessionObject($sessionObject->{SESSIONID});
-#	LOGGER::LOG(Dumper($s . " :storeSessionObject"));
+	store $sessionObject, "/tmp/$sessionID" || die $!;
 
 }
 
@@ -224,5 +134,30 @@ sub getSessionInstance
 	return $sInstancePre . int(rand(scalar(@numInstances)));
 
 }
+
+sub storeSessionObject
+{
+        my $sessionObject = shift;
+        my $sessionFile = $sessionObject->{SESSIONID};
+	store $sessionObject, "/tmp/$sessionFile" || die $!;
+
+}
+
+sub validateSession
+{
+        my ($sessionID,$userID)  = ();
+
+        my %cookies = fetch CGI::Cookie;
+        return $false unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});
+
+        $sessionID = $cookies{'stock_SessionID'}->value;
+        $userID = $cookies{'stock_UserID'}->value;
+
+	my $sessionObject = retrieve("/tmp/$sessionID") || return Error->new(106);
+
+        return $sessionObject;
+
+}
+
 
 1;

@@ -4,7 +4,7 @@ use strict;
 use lib "../../script_src"; # temporary use...will go away
 use IPC::Shareable;
 use Error;
-use LOGGER;
+#use LOGGER;
 use Data::Dumper;
 
 my $glue='sess';

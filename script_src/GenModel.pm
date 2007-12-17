@@ -4,10 +4,9 @@ use strict;
 use DBI;
 use GenView;
 use DbConfig;
-use LOGGER;
 use Data::Dumper;
 use Benchmark;
-
+use CGI::Carp;
 sub new
 {
 	my $class = shift;
@@ -45,8 +44,8 @@ sub genSQL
 		}
 		
 
-#		LOGGER::LOG(Dumper($sessObj->{DATA}));
-		LOGGER::LOG("$i ########### $j");
+#		carp(Dumper($sessObj->{DATA}));
+		carp("$i ########### $j");
 				
 		$data = ${@{$sessObj->{DATA}}}[$i];
 		$sqlStr .= " '$data' ";
@@ -57,7 +56,7 @@ sub genSQL
 
 		$sqlStr .= " ) ORDER BY limit_price, order_quantity ";
 		$self->{SQLSTR} = $sqlStr;
-		LOGGER::LOG ("$self->{SQLSTR} : SESSIONOBJECTSQL");
+		carp("$self->{SQLSTR} : SESSIONOBJECTSQL");
 
 	} else {
                 my %requestParms = %{$self->{PARMS}};
@@ -71,7 +70,7 @@ sub genSQL
 		$sqlStr   .= " ORDER BY limit_price, order_quantity ";
                 $self->{SQLSTR} =  $sqlStr;
 
-		LOGGER::LOG ("$self->{SQLSTR} : PARAMETERSQL");
+		carp ("$self->{SQLSTR} : PARAMETERSQL");
 	}
  
 }
@@ -85,7 +84,7 @@ sub execIndexQuery
 				or die "Cannot Connect to Database $DBI::errstr\n";
 
 	my $sth = $dbh->prepare($self->{SQLSTR}); 
-	LOGGER::LOG("$self->{SQLSTR} : EXECINDEXQUERY" );
+	carp("$self->{SQLSTR} : EXECINDEXQUERY" );
 
         my $time00 = new Benchmark;
 	$sth->execute();
@@ -94,9 +93,9 @@ sub execIndexQuery
         my $timedd = timediff($time11, $time00);
         my $tstr =  timestr($timedd);
 
-        LOGGER::LOG(" ====================");
-        LOGGER::LOG(" ======== Timer: $tstr ======");
-        LOGGER::LOG(" =====================");
+        carp(" ====================");
+        carp(" ======== Timer: $tstr ======");
+        carp(" =====================");
 
 	$self->{ROWCOUNT} = $sth->rows;
 
@@ -122,7 +121,7 @@ sub execQuery
 
         my $sth = $dbh->prepare($self->{SQLSTR});
 
-	LOGGER::LOG("$self->{SQLSTR} : EXECQUERY" );
+	carp("$self->{SQLSTR} : EXECQUERY" );
 
         $sth->execute();
         $self->{DATAREF} = $sth->fetchall_arrayref();

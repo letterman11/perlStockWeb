@@ -24,6 +24,8 @@ sub stockHeaderHtml
 sub display
 {
    my $self = shift(); 
+   my $errstr = shift if @_;
+   
    my $out_buffer = ();
 
    print StockUtil::headerHtml();
@@ -47,6 +49,7 @@ sub display
               </tr>
               </table>
           </form>
+	<span class="errtext"> <p> $errstr </p> </span>
         </div>
 </div>
 
