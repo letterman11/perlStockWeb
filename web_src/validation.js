@@ -39,6 +39,7 @@ function clearFields(handler)
    handle.frmStockApp.maxPrice.value="";
    handle.frmStockApp.minQty.value="";
    handle.frmStockApp.maxQty.value="";
+   handle.frmStockApp.rowsPerPage.value="";
 }
 
 
@@ -49,7 +50,8 @@ function init()
    //alert('stockSessionID ' + stock_SessionID + 'length ' + stock_SessionID.length ); 
 
    if ((stock_SessionID != null) && (stock_SessionID.length >= stockIDLen)) {
-      document.getElementById('login').style.visibility='hidden';
+ //     document.getElementById('login').style.visibility='hidden';
+      document.getElementById('login').style.display='none';
       document.getElementById('queryForm').style.visibility='visible';
       document.getElementById('query').style.visibility='visible';
    }  

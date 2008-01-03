@@ -1,4 +1,4 @@
-.results {font-size: 8pt; font-family: arial; }
+.results {font-size: 8pt; font-family: arial; border: none; }
 .form_login { font-size: 8pt; font-family: arial; background-color: #E3E3E3 }
 .form_query { font-size: 8pt; font-family: arial; background-color: #E3E3E3 }
 .list { color: black; font-size: 14pt; font-family: Arial;   }
@@ -19,34 +19,39 @@ div {
   display:block;
   position:relative;
   float:left;
+  border-style:none; 
 }
 
 #main {
-
   position:relative;
-  max-width:100%;
-  height: 55px;
+  width:100%;
+  height: auto;
 }
 
 #banner  {
-
-  margin: 1% 1% 1% 1%;
+  margin: 5px;
+  padding: 5px;
   float: left;
+  top:0;
+  left:0;
 }
 
 #login {
-
-  padding:1%;
-  margin-bottom: 1em;
   float: right;
 }
 
-
 #queryForm {
+
+}
+
+#query {
+}
+
+
+#queryResult {
 }
 
 #testButton {
-
   top:0;
   left:0;
   position: relative;
