@@ -84,14 +84,12 @@ sub genNavigation
 	my $rowsPerPage = $self->{ROWSPERPAGE};
 
 	if($totRows > $rowsPerPage) {
-		$buffer_out  = "\n<table boder=0 align=left>";
-		$buffer_out .= "<tr><td>Page(s)</td> ";
+		$buffer_out .= "Page(s) ";
 		do {
-			$buffer_out .= "<td><A HREF=/cgi-bin/stockReportDetail.cgi?page=" . $pgCnt .  "&rowsPerPage=" . $rowsPerPage . ">" .  $pgCnt . "</A></td>";
+			$buffer_out .= " <A HREF=/cgi-bin/stockReportDetail.cgi?page=" . $pgCnt .  "&rowsPerPage=" . $rowsPerPage . ">" .  $pgCnt . "</A> ";
 			$currCnt += $rowsPerPage;
 			$pgCnt++;
 		}while($currCnt < $totRows);
-		$buffer_out .= "</tr></table>"
 	}
 	return $buffer_out;
 
