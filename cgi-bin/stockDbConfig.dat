@@ -5,7 +5,13 @@
 #---------------------------------------------------
 
 
-hostname=localhost
-user=abrooks
-password=abrooks
-database=Widgets
+#hostname=192.168.1.100
+#user=abrooks
+#password=abrooks
+#database=Widgets
+
+
+hostname=octagonyellow.web.aplus.net
+user=octagonyellow
+password=Corliss8
+database=octagonyellow
