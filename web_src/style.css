@@ -6,16 +6,20 @@
 .paleyellow { color: #FFFF99 }
 .palegrey { color: #EFEFEF}
 .errtext { color: red; font-size: 10pt }
-.tbl_register { }
-/* .tbl_hd { background-color: #B1C5FF; text-align: center } */
-.tbl_hd { background-color: #E0E0E0; text-align: center } 
+.validation_register { color: red }
+.val_error { font-size: 8pt; font-family: arial; color: red; background-color: white; }
+.tbl_hd { background-color: #E0E0E0; text-align: center }
 .tbl_num1 { background-color: #D0D0D0; text-align: right }
 .tbl_num2 { background-color: #E8E8E8; text-align: right }
 .tbl_txt { text-align: left }
+
+/* .tbl_hd { background-color: #B1C5FF; text-align: center } */
 /*
 .tbl_num1 { background-color: #D2D2FF; text-align: right }
 .tbl_num2 { background-color: #E5E5FF; text-align: right }
 */
+
+
 
 div {
   display:block;
@@ -47,24 +51,4 @@ div {
   float: right;
 }
 
-#queryForm {
 
-}
-
-#query {
-}
-
-
-#queryResult {
-}
-
-#register {
-  float: left;
-}
-
-#testButton {
-  top:0;
-  left:0;
-  position: relative;
-
-}

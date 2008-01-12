@@ -4,8 +4,8 @@
   <HEAD>
     <TITLE>Stock Query Application - Registration </TITLE>
         <LINK href="/~abrooks/style.css" rel="stylesheet" type="text/css">
-        <script language="Javascript1.2" src="/~abrooks/validation.js"> </script>
-        <script language="Javascript1.2" src="/~abrooks/common.js"> </script>
+        <script language="Javascript" src="/~abrooks/validation.js"> </script>
+        <script language="Javascript" src="/~abrooks/common.js"> </script>
  </HEAD>
  <BODY> 
 
@@ -19,25 +19,25 @@
    <form name="frmRegister" method="POST" action="../cgi-bin/registration.cgi">
      <table>
 	<tr class="form_register">			
-	   <td> First Name: </td> <td> <input name="firstName" type="text" </td>
+	   <td> First Name: </td> <td> <input name="firstName" type="text"> </td> <td class="val_error"> </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> Last Name: </td> <td> <input name="lastName" type="text" </td>
+	   <td> Last Name: </td> <td> <input name="lastName" type="text"> </td> <td class="val_error"> &nbsp; </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> Address1: </td> <td> <input name="address1" type="text" </td>
+	   <td> Address1: </td> <td> <input name="address1" type="text"> </td> <td class="val_error"> </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> Address2: </td> <td> <input name="address2" type="text" </td>
+	   <td> Address2: </td> <td> <input name="address2" type="text"> </td> <td class="val_error"> </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> Zip Code: </td> <td> <input name="zipcode" type="text" </td>
+	   <td> Zip Code: </td> <td> <input name="zipcode" type="text"> </td> <td class="val_error"> </td>
 	</tr>
 	<tr class="form_register">
-	   <td> City: </td> <td> <input name="zipcode" type="text" </td>
+	   <td> City: </td> <td> <input name="city" type="text"> </td> <td class="val_error"> </td>
 	</tr>
 	<tr class="form_register">
-	   <td> Phone: </td> <td> <input name="phone" type="text" </td>
+	   <td> Phone: </td> <td> <input name="phone" type="text"> </td> <td class="val_error"> </td>
 	</tr>
 	<tr class="form_register">			
 	   <td > State: </td> <td> <select id="state" name="state"><option value=""></option>
@@ -109,20 +109,20 @@
 	<option value="PR">PR</option>
 	
 	<option value="PW">PW</option>
-	<option value="VI">VI</option></select></td> 
+	<option value="VI">VI</option></select></td> <td class="val_error"> &nbsp </td> 
 	</tr>	
 
 	<tr class="form_register">			
-	   <td> Email Address: </td> <td> <input name="email" type="text" </td>
+	   <td> Email Address: </td> <td> <input name="email" type="text"> </td> <td class="val_error" id="val_email"> </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> User Name </td> <td> <input name="userName" type="text" </td>
+	   <td> User Name </td> <td> <input name="userName" type="text"> </td> <td class="val_error" id="val_username"> </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> Password: </td> <td> <input name="password" type="password" </td>
+	   <td> Password: </td> <td> <input name="password" type="password"> </td> <td class="val_error" id="val_password"> </td>
 	</tr>
-	<tr> <td> &nbsp; </td> </tr>
-	<tr> <td> <input type="submit" name="submit" value="SUBMIT" onsubmit="validateReg()"> </td> </tr>
+	<tr> <td> &nbsp; </td> <td> </td> </tr>
+	<tr> <td> <input type="submit" name="submit" value="SUBMIT" onsubmit="validateReg()"> </td> <td class="val_error"> </td> </tr>
       </table>
     </form>
 </div> 
