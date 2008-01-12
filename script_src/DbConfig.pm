@@ -3,7 +3,10 @@ package DbConfig;
 use strict;
 use FileHandle;
 
-
+$::attr = { 
+		PrintError => 1,
+		RaiseError => 0,
+	}; 
 
 sub new
 {
