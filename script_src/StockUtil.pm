@@ -153,7 +153,9 @@ sub validateSession
         $sessionID = $cookies{'stock_SessionID'}->value;
         $userID = $cookies{'stock_UserID'}->value;
 
-	my $sessionObject = retrieve("/tmp/$sessionID") || return Error->new(106);
+	return Error->new(103) 	if not -e "/tmp/$sessionID";
+
+	my $sessionObject = retrieve("/tmp/$sessionID") || return Error->new(103);
 
         return $sessionObject;
 
