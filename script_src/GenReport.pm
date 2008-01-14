@@ -63,7 +63,7 @@ sub display2
 	 	            .  "<td class='tbl_txt' width=25%> $stock_symbol</td><td> $limit_price </td><td> $order_quantity</td></tr>\n";
 
 	} 
-	$buffer_out .= "<tr><td colspan='100%'>";
+	$buffer_out .= "<tr class='results'><td colspan='100%'>";
 	$buffer_out .= $self->genNavigation();
 	$buffer_out .= "\n </td></tr>\n";
 	$buffer_out .= "\n</table>\n";
