@@ -16,7 +16,7 @@
 </div>
 
 <div id="register">
-   <form name="frmRegister" method="POST" action="../cgi-bin/registration.cgi">
+   <form name="frmRegister" method="POST" action="../cgi-bin/registration.cgi" onsubmit="return validateRegistration(document.frmRegister)">
      <table>
 	<tr class="form_register">			
 	   <td> First Name: </td> <td> <input name="firstName" type="text"> </td> <td class="val_error"> </td>
@@ -113,16 +113,16 @@
 	</tr>	
 
 	<tr class="form_register">			
-	   <td> Email Address: </td> <td> <input name="email" type="text"> </td> <td class="val_error" id="val_email"> </td>
+	   <td> Email Address: </td> <td> <input name="email" type="text"> </td> <td class="val_error" id="val_email"> Invalid email address: use form joe@doe.com </td>
 	</tr>
 	<tr class="form_register">			
 	   <td> User Name </td> <td> <input name="userName" type="text"> </td> <td class="val_error" id="val_username"> </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> Password: </td> <td> <input name="password" type="password"> </td> <td class="val_error" id="val_password"> </td>
+	   <td> Password: </td> <td> <input name="password" type="password"> </td> <td class="val_error" id="val_password">Invalid password: minimum length 6 characters </td>
 	</tr>
 	<tr> <td> &nbsp; </td> <td> </td> </tr>
-	<tr> <td> <input type="submit" name="submit" value="SUBMIT" onsubmit="validateReg()"> </td> <td class="val_error"> </td> </tr>
+	<tr> <td> <input type="submit" name="submit" value="SUBMIT"> </td> <td class="val_error"> </td> </tr> 
       </table>
     </form>
 </div> 
