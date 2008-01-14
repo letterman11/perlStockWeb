@@ -9,27 +9,25 @@ use CGI::Carp qw(fatalsToBrowser);
 use DBI;
 
 my $query = new CGI;
+my $callObj =  StockUtil::formValidation($query);
 
-my $first_name = $query->param('firstName');
-my $last_name = $query->param('lastName');
-my $address1 = $query->param('address1');
-my $address2 = $query->param('address2');
-my $city = $query->param('city');
-my $state = $query->param('state');
-my $zipcode = $query->param('zipcode');
-my $phone = $query->param('phone');
-my $email_address = $query->param('email');
-my $user_name = $query->param('userName');
-my $password = $query->param('password');
+if (ref $callObj eq 'Error') {
+	GenError->new($callObj)->display();
+}
 
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^#
-#===== Perform validation =======#
+my $sqlHash = $callObj;
 
 my $dbconf = DbConfig->new();
 
-my $insert_sql_str = "INSERT INTO user VALUES ($user_name,$user_name,$password," 
-					. "$first_name,$last_name,$address1,$address2,$zipcode,"
-					. "$phone,$email_address,$state,$city)";
+#my $insert_sql_str = "INSERT INTO user VALUES ($user_name,$user_name,$password," 
+#					. "$first_name,$last_name,$address1,$address2,$zipcode,"
+#					. "$phone,$email_address,$state,$city)";
+
+my $insert_sql_str = "INSERT INTO user VALUES ($sqlHash->{userName},$sqlHash->{userName},$sqlHash->{password}," 
+					. "$sqlHash->{firstName},$sqlHash->{lastName},$sqlHash->{address1},$sqlHash->{address2},$sqlHash->{zipcode},"
+					. "$sqlHash->{phone},$sqlHash->{email},$sqlHash->{state},$sqlHash->{city})";
+
+
 carp ("$insert_sql_str");
 
 my $dbh = DBI->connect( "dbi:mysql:"
