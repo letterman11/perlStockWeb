@@ -13,13 +13,6 @@ sub stockHeaderHtml
 
 }
 
-#sub new
-#{
-#   my $class = shift();
-#   my $self = ();
-#   @_ ?  $self = shift() : $self =  {};
-#   bless ($self,$class);
-#}
 
 sub display
 {
@@ -46,6 +39,9 @@ sub display
               </tr>
               <tr class="form_login">
                   <td colspan="2"> <input type="submit"> <input type="reset"> </td>
+              </tr>
+              <tr class="form_login">
+                  <td> Not Registered?   Register <a href="/~abrooks/registration.html"> here </a> </td>
               </tr>
               </table>
           </form>
