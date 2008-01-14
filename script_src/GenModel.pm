@@ -7,6 +7,7 @@ use DbConfig;
 use Data::Dumper;
 use Benchmark;
 use CGI::Carp;
+
 sub new
 {
 	my $class = shift;
@@ -80,7 +81,7 @@ sub execIndexQuery
 	my $self = shift();
 	my $dbconf = DbConfig->new();
 	my $dbh	= DBI->connect( "dbi:mysql:" . $dbconf->dbName() . ":" 
-			. $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass() )
+			. $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass(), $::attr )
 				or die "Cannot Connect to Database $DBI::errstr\n";
 
 	my $sth = $dbh->prepare($self->{SQLSTR}); 
@@ -116,7 +117,7 @@ sub execQuery
         my $self = shift();
         my $dbconf = DbConfig->new();
         my $dbh = DBI->connect( "dbi:mysql:" . $dbconf->dbName() . ":"
-	                . $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass() )
+	                . $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass(), $::attr )
        			         or die "Cannot Connect to Database $DBI::errstr\n";
 
         my $sth = $dbh->prepare($self->{SQLSTR});
