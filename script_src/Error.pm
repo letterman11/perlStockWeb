@@ -22,6 +22,12 @@ my %err_codes = (
 			103 => "Session Exists",
 			104 => "No Session Exists for ID",
 			105 => "No Object exists for Session",
+			106 => undef,
+			107 => undef,
+			108 => undef,
+			109 => undef,
+			110 => undef,
+			111 => undef,
 			ERRCOND => undef,
 		);	
 
