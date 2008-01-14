@@ -1,13 +1,13 @@
-.results {font-size: 8pt; font-family: arial; border: none; }
-.form_login { font-size: 8pt; font-family: arial; background-color: #E3E3E3 }
-.form_register { font-size: 8pt; font-family: arial; background-color: #E3E3E3 }
-.form_query { font-size: 8pt; font-family: arial; background-color: #E3E3E3 }
+.results {font-size: 10pt; font-family: arial; border: none; }
+.form_login { font-size: 10pt; font-family: arial; background-color: #E3E3E3 }
+.form_register { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; background-color: #E3E3E3 } 
+.form_query { font-size: 10pt; font-family: arial; background-color: #E3E3E3 }
 .list { color: black; font-size: 14pt; font-family: Arial;   }
 .paleyellow { color: #FFFF99 }
 .palegrey { color: #EFEFEF}
 .errtext { color: red; font-size: 10pt }
 .validation_register { color: red }
-.val_error { font-size: 8pt; font-family: arial; color: red; background-color: white; }
+.val_error { margin:0px; padding:0px; font-size: 10pt; font-family: arial; color: red; background-color: white; display: none; border:solid }
 .tbl_hd { background-color: #E0E0E0; text-align: center }
 .tbl_num1 { background-color: #D0D0D0; text-align: right }
 .tbl_num2 { background-color: #E8E8E8; text-align: right }
@@ -19,7 +19,9 @@
 .tbl_num2 { background-color: #E5E5FF; text-align: right }
 */
 
-
+td {
+  min-height: 20px;
+}
 
 div {
   display:block;
