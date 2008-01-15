@@ -167,7 +167,6 @@ sub formValidation
 	my %sqlInsert = ();
 	my $passLen = 6;
 	my $userLen = 6;
-	my $emailValRegex = "\w{1}[\w\.]+?\.{1}\w{1}@\w{1}[\w\.]+?\.{1}\w{1}";
 
 	$sqlInsert{firstName} =	isset($query->param('firstName')) ? $query->param('firstName') : 'NULL';
 	$sqlInsert{lastName} =	isset($query->param('lastName')) ? $query->param('lastName') : 'NULL';
@@ -181,7 +180,7 @@ sub formValidation
 	$sqlInsert{userName} =	isset($query->param('userName')) ? $query->param('userName') : 'NULL';
 	$sqlInsert{password} =	isset($query->param('password')) ? $query->param('password') : 'NULL';
 
-	return Error->new(108) if($sqlInsert{email} eq 'NULL' || $sqlInsert{userName} eq 'NULL' || $sqlInsert{password} eq 'NULL')
+	return Error->new(108) if($sqlInsert{email} eq 'NULL' || $sqlInsert{userName} eq 'NULL' || $sqlInsert{password} eq 'NULL');
 
 	return Error->new(109) if($sqlInsert{email} !~ /\w+[\w.]+?\w+@\w+[\w.]+?\.\w+\s*$/);
 
@@ -194,7 +193,7 @@ sub formValidation
 
 sub isset
 {
-  return (!((not defined $_[0]) && ($_[0] =~ /^\s*$/)));
+  return ((defined $_[0]) && ($_[0] !~ /^\s*$/));
 }
 
 
