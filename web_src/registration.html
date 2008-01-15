@@ -36,9 +36,6 @@
 	<tr class="form_register">
 	   <td> City: </td> <td> <input name="city" type="text"> </td> <td class="val_error"> </td>
 	</tr>
-	<tr class="form_register">
-	   <td> Phone: </td> <td> <input name="phone" type="text"> </td> <td class="val_error"> </td>
-	</tr>
 	<tr class="form_register">			
 	   <td > State: </td> <td> <select id="state" name="state"><option value=""></option>
 	<option value="AK">AK</option>
@@ -112,11 +109,14 @@
 	<option value="VI">VI</option></select></td> <td class="val_error"> &nbsp </td> 
 	</tr>	
 
+	<tr class="form_register">
+	   <td> Phone: </td> <td> <input name="phone" type="text"> </td> <td class="val_error"> </td>
+	</tr>
 	<tr class="form_register">			
 	   <td> Email Address: </td> <td> <input name="email" type="text"> </td> <td class="val_error" id="val_email"> Invalid email address: use form joe@doe.com </td>
 	</tr>
 	<tr class="form_register">			
-	   <td> User Name </td> <td> <input name="userName" type="text"> </td> <td class="val_error" id="val_username"> </td>
+	   <td> User Name </td> <td> <input name="userName" type="text"> </td> <td class="val_error" id="val_username">Invalid user name: minimum length 6 characters  </td>
 	</tr>
 	<tr class="form_register">			
 	   <td> Password: </td> <td> <input name="password" type="password"> </td> <td class="val_error" id="val_password">Invalid password: minimum length 6 characters </td>
