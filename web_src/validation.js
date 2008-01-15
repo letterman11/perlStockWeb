@@ -1,6 +1,7 @@
 var handle = window.document;
-var reEmailValidation = /\w{1}[\w.]+?\w{1}@[A-Za-z0-9]+[A-Za-z0-9.]+.{1}\w{1}\s*$/;
+var reEmailValidation = /^\w+[\w.]+?\w+@\w+[\w.]+?\.{1}\w+\s*$/;
 var passLen = 6;
+var userLen = 6;
 
 function goSubmit()
 {
@@ -72,12 +73,18 @@ function validateRegistration()
         state = false
    }
 
+   if(regForm.userName.value.length < userLen) {
+        document.getElementById("val_username").style.display = "block";
+        state = false
+   }
+
    if(regForm.password.value.length < passLen) {
 	document.getElementById("val_password").style.display = "block";
         state = false
    }
 
-   return false;
+//   return false;
+   return state;
 
 }
 
@@ -85,6 +92,7 @@ function clearValidationRegistration()
 {
    var regForm = arguments[0]; 
    document.getElementById("val_email").style.display = "none";
+   document.getElementById("val_username").style.display = "none";
    document.getElementById("val_password").style.display = "none";
 
 }
