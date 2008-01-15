@@ -1,6 +1,5 @@
 package GenReport;
 
-@GenReport::ISA = qw(GenView);
 
 use strict;
 

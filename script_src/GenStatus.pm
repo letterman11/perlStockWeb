@@ -1,16 +1,15 @@
-package GenError;
-
+package GenStatus;
 
 use strict;
 use StockUtil;
 
-
 sub new
 {
-        my $class = shift();
-        my $self = {};
+	my $class = shift();
+	my $self = {};
         bless ($self,$class);
 }
+
 
 sub display
 {
@@ -21,13 +20,14 @@ sub display
 
    print StockUtil::headerHtml();
    $out_buffer = <<"OUT_HTML";
-<div id="main">
+<div id="header">
         <div id="banner">
                    <img src="/~abrooks/DCBANNER_CROP2.jpg">
         </div>
-<div>
+</div>
 
-<div id="app_error">
+<div id="app_status">
+
 	<span class="errtext"> <p> $errstr </p> </span>
 </div>
 
@@ -35,6 +35,7 @@ OUT_HTML
    print $out_buffer;
    StockUtil::footerHtml();
 }
+
 
 
 
