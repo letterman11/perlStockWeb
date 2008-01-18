@@ -2,6 +2,8 @@ var handle = window.document;
 var reEmailValidation = /^\w+[\w.]+?\w+@\w+[\w.]+?\.{1}\w+\s*$/;
 var passLen = 6;
 var userLen = 6;
+var stock_UserID;
+var Instance = getCookie('Instance');
 
 function goSubmit()
 {
@@ -49,14 +51,15 @@ function clearFields(handler)
 function init()
 {
 
-   stock_SessionID = getCookieData('stock_SessionID');
+   stock_SessionID = getCookie('stock_SessionID');
    //alert('stockSessionID ' + stock_SessionID + 'length ' + stock_SessionID.length ); 
 
-   if ((stock_SessionID != null) && (stock_SessionID.length >= stockIDLen)) {
- //     document.getElementById('login').style.visibility='hidden';
+   if ((stock_SessionID != null || stock_SessionID != 'null') && (stock_SessionID.length >= stockIDLen)) {
       document.getElementById('login').style.display='none';
       document.getElementById('queryForm').style.visibility='visible';
       document.getElementById('query').style.visibility='visible';
+      document.getElementById('logged_on').style.visibility='visible';
+
    }  
 }
 
@@ -94,5 +97,14 @@ function clearValidationRegistration()
    document.getElementById("val_email").style.display = "none";
    document.getElementById("val_username").style.display = "none";
    document.getElementById("val_password").style.display = "none";
+
+}
+
+function logOut()
+{
+   for(i=0; i<arguments.length; i++) {
+      eraseCookie(arguments[i]);
+   }	
+   location = "/~abrooks/StockApp.html";
 
 }
