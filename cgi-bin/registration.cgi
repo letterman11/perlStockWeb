@@ -7,7 +7,8 @@ use GenStatus;
 use StockUtil;
 use DbConfig;
 use CGI qw /:standard/;
-use CGI::Carp qw(fatalsToBrowser);
+#use CGI::Carp qw(fatalsToBrowser);
+use CGI::Carp;
 use DBI;
 
 my $query = new CGI;
@@ -15,39 +16,41 @@ my $callObj =  StockUtil::formValidation($query);
 
 if (ref $callObj eq 'Error') {
 	GenError->new($callObj)->display("Invalid form submission\n");
-}
+	
+} else {
 
-my $sqlHash = $callObj;
+	my $sqlHash = $callObj;
 
-my $dbconf = DbConfig->new();
+	my $dbconf = DbConfig->new();
 
-my $insert_sql_str = "INSERT INTO user VALUES ('$sqlHash->{userName}','$sqlHash->{userName}','$sqlHash->{password}'," 
+	my $insert_sql_str = "INSERT INTO user VALUES ('$sqlHash->{userName}','$sqlHash->{userName}','$sqlHash->{password}'," 
 					. "'$sqlHash->{firstName}','$sqlHash->{lastName}','$sqlHash->{address1}','$sqlHash->{address2}',"
 					. "$sqlHash->{zipcode},'$sqlHash->{phone}','$sqlHash->{email}','$sqlHash->{state}','$sqlHash->{city}')";
 
 
-carp ("$insert_sql_str");
+	carp ("$insert_sql_str");
 
-my $dbh = DBI->connect( "dbi:mysql:"
-                . $dbconf->dbName() . ":"
-                . $dbconf->dbHost(),
-                  $dbconf->dbUser(),
-                  $dbconf->dbPass(), $::attr )
-		  or GenError->new(Error->new(102))->display();
+	my $dbh = DBI->connect( "dbi:mysql:"
+	                . $dbconf->dbName() . ":"
+	                . $dbconf->dbHost(),
+	                  $dbconf->dbUser(),
+	                  $dbconf->dbPass(), $::attr )
+			  or GenError->new(Error->new(102))->display();
                
-eval {
+	eval {
 	
-	my $sth = $dbh->prepare($insert_sql_str);
+		my $sth = $dbh->prepare($insert_sql_str);
 	
-	$sth->execute();
+		$sth->execute();
 
-	$dbh->disconnect();
+		$dbh->disconnect();
 
-};
+	};
 
-GenError->new(Error->new(102))->display("Application Error occurred try later\n") and die "$@" if ($@);
+	GenError->new(Error->new(102))->display("Application Error occurred try later\n") and die "$@" if ($@);
 
-GenStatus->new()->display("Registration successful for $sqlHash->{userName}\n");
+	GenStatus->new()->display("Registration successful for $sqlHash->{userName}\n");
+}
 
 exit;
 
