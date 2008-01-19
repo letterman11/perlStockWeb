@@ -105,6 +105,4 @@ function logOut()
    for(i=0; i<arguments.length; i++) {
       eraseCookie(arguments[i]);
    }	
-   location = "/~abrooks/StockApp.html";
-
 }
