@@ -4,8 +4,8 @@
   <HEAD>
     <TITLE>Stock Query Application</TITLE>
 	<LINK href="/~abrooks/style.css" rel="stylesheet" type="text/css">
-	<script language="Javascript1.2" src="/~abrooks/validation.js"> </script>
-	<script language="Javascript1.2" src="/~abrooks/common.js"> </script>
+	<script language="Javascript" src="/~abrooks/common.js"> </script>
+	<script language="Javascript" src="/~abrooks/validation.js"> </script>
  
  </HEAD>
  <BODY onLoad="init()">
@@ -33,6 +33,20 @@
 	      </table>
 	  </form>
 	</div>
+
+	<div id="logged_on" style="visibility:hidden">
+         <span class="form_login">  
+ 	   <script language="Javascript" type="text/javascript">
+	     stock_UserID = getCookie('stock_UserID'); 
+             if(stock_UserID != null && stock_UserID.length > 0) {
+		document.write(stock_UserID + " LOGGED IN | ");
+	     }		
+	   </script>
+	   <a href="javascript:void 0" onclick="logOut('stock_UserID','stock_SessionID','Instance')" > LOG OUT </a>
+	 </span>
+	</div>
+
+
 </div>
 
 <div id="queryForm" style="visibility:hidden">
