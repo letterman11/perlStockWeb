@@ -13,11 +13,11 @@
 .tbl_num2 { background-color: #E8E8E8; text-align: right }
 .tbl_txt { text-align: left }
 
-/* .tbl_hd { background-color: #B1C5FF; text-align: center } */
-/*
-.tbl_num1 { background-color: #D2D2FF; text-align: right }
-.tbl_num2 { background-color: #E5E5FF; text-align: right }
-*/
+a.nolinkstyle  {
+  color: white;
+  padding:0;
+  margin:0;
+}
 
 td {
   min-height: 20px;
