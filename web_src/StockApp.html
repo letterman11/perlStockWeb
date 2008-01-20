@@ -12,7 +12,7 @@
 
 <div id="main">
 	<div id="banner">
-  		   <img src="/~abrooks/DCBANNER_CROP2.jpg"> 
+  	 <a class="nolinkstyle" href="/~abrooks/StockApp.html">	   <img src="/~abrooks/DCBANNER_CROP2.jpg">  </a>
 	</div>
 
 	<div id="login" style="visibility:visible">
@@ -39,10 +39,11 @@
  	   <script language="Javascript" type="text/javascript">
 	     stock_UserID = getCookie('stock_UserID'); 
              if(stock_UserID != null && stock_UserID.length > 0) {
-		document.write(stock_UserID + " LOGGED IN | ");
-	     }		
-	   </script>
-	   <a href="/~abrooks/StockApp.html" onclick="logOut('stock_UserID','stock_SessionID','Instance')" target="_top" > LOG OUT </a> 
+		document.write(stock_UserID + " LOGGED IN | " + 
+	   	" <a href=\"/~abrooks/StockApp.html\" onclick=\"logOut('stock_UserID','stock_SessionID','Instance')\" target=\"_top\" > LOG OUT </a> " + 
+	   	" | <a href=\"/cgi-bin/profile_page.cgi?userName=" + stock_UserID + "\">" +  " update profile </a> "); 
+	     }
+	  </script>
 	 </span>
 	</div>
 
@@ -79,7 +80,7 @@
 </div>
 
 <div id="query" style="visibility:hidden">
-  <iframe id="queryResult" name="queryframe" height= "500" src="" width="950" frameborder="0" marginheight="0" marginwidth="5" >
+  <iframe id="queryResult" name="queryframe" height= "600" src="" width="800" frameborder="0" marginheight="0" marginwidth="5" >
   </iframe>
 </div>
 
