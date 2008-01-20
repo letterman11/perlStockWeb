@@ -72,13 +72,7 @@ if (not defined ($user_row[1])) {
 				$stockSessionID, 
 				$user_row[$userName]);
 
-	open(FH, "<$startpage") or 
-		warn "Cannot open $startpage\n";
-	my $terminator = $/;
-	undef $/;
-	my $out_page = <FH>; #slurp file all at once via above line.
-	$/ = $terminator;
-	close(FH);
+	my $out_page = StockUtil::slurp_file($startpage);
 
 	print header;
 	print $out_page, "\n";
