@@ -191,6 +191,21 @@ sub formValidation
 	return \%sqlInsert;
 }
 
+sub slurp_file
+{
+	my $file_name = shift;
+	my $out_page = ();
+
+        open(FH, "<$file_name") or
+                warn "Cannot open $file_name\n";
+        my $terminator = $/;
+        undef $/;
+        $out_page = <FH>; #slurp file all at once via above line.
+        $/ = $terminator;
+        close(FH);
+	return $out_page;
+}
+
 sub isset
 {
   return ((defined $_[0]) && ($_[0] !~ /^\s*$/));
