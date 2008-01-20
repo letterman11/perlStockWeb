@@ -63,6 +63,24 @@ function init()
    }  
 }
 
+function init_profile()
+{
+	
+   document.frmRegister.firstName.value = firstName;
+   document.frmRegister.lastName.value = lastName;
+   document.frmRegister.address1.value = address1;
+   document.frmRegister.address2.value = address2;
+   document.frmRegister.zipcode.value = zipCode;
+   document.frmRegister.city.value = city;
+   document.frmRegister.state.value = firstName;
+   document.frmRegister.firstName.value = firstName;
+   document.frmRegister.phone.value = firstName;
+//   document.frmRegister.state.value = firstName;
+//  document.frmRegister.state.value = firstName;
+
+
+}
+
 function validateRegistration()
 {
    var regForm = arguments[0];
