@@ -14,7 +14,7 @@ use DBI;
 my $userID = 0;
 my $userName = 1;
 my $userPass = 2;
-my $startpage="/home/abrooks/www/StockApp/web_src/StockApp.html";
+my $startpage="/home/abrooks/www/StockApp/web_src/stockapp.html";
 my $query = new CGI;
 
 
