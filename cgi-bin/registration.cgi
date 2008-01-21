@@ -4,6 +4,8 @@ use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
 use GenView;
 use GenStatus;
+use Error;
+use GenError;
 use StockUtil;
 use DbConfig;
 use CGI qw /:standard/;
