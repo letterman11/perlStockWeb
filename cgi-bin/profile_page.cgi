@@ -4,6 +4,8 @@ use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
 use GenView;
 use GenStatus;
+use GenError;
+use Error;
 use StockUtil;
 use GenProfile;
 use DbConfig;
@@ -19,7 +21,7 @@ if (defined($user_name) && ($user_name !~ /^\s*$/)) {
 
 	my $dbconf = DbConfig->new();
 
-	my $select_sql_str = "SELECT user_name, user_passwd, fname, lname, address1, address2," 
+	my $select_sql_str = "SELECT user_name, fname, lname, address1, address2," 
 					. " zip_code, phone, email_address, state, city "
 					. " FROM user WHERE user_name = '" . $user_name . "'"; 
 	carp ("$select_sql_str");
@@ -45,6 +47,7 @@ if (defined($user_name) && ($user_name !~ /^\s*$/)) {
 
 	GenError->new(Error->new(102))->display("Application Error occurred try again later\n") and die "$@" if ($@);
 
+	print header;
 	GenProfile->new(\@profile_array)->display();
 
 } else {
