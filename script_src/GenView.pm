@@ -20,7 +20,7 @@ sub display_header
 	$out_buffer = <<"OUT_HTML";
 <div id="main">
         <div id="banner">
-         <a class="nolinkstyle" href="/~abrooks/StockApp.html">    <img src="/~abrooks/DCBANNER_CROP2.jpg">  </a>
+         <a href="/~abrooks/stockapp.html">    <img id="banner_image" src="/~abrooks/DCBANNER_CROP2.jpg">  </a>
         </div>
 
         <div id="login" style="visibility:visible">
@@ -47,11 +47,11 @@ sub display_header
            <script language="Javascript" type="text/javascript">
              stock_UserID = getCookie('stock_UserID');
              if(stock_UserID != null && stock_UserID.length > 0) {
-                document.write(stock_UserID + " LOGGED IN | ");
+                document.write(stock_UserID + " LOGGED IN | " +
+                " <a href=/~abrooks/stockapp.html onclick=logOut('stock_UserID','stock_SessionID','Instance') target=_top > LOG OUT </a> " +
+                " | <a href=/cgi-bin/profile_page.cgi?userName=" + stock_UserID + ">" +  " update profile </a> ");
              }
-           </script>
-           <a href="/~abrooks/StockApp.html" onclick="logOut('stock_UserID','stock_SessionID','Instance')" target="_top" > LOG OUT </a>
-            | <a href="/cgi-bin/profile_page.cgi?'userName'=stock_UserID"> update profile </a>
+          </script>
          </span>
         </div>
 </div>
