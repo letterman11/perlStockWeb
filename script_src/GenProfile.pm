@@ -3,6 +3,7 @@ package GenProfile;
 @ISA = qw(GenView);
 
 use strict;
+use CGI;
 use CGI::Carp;
 use DBI;
 
@@ -23,12 +24,12 @@ sub display
 {
 
 	my $self = shift;
-	my ($userName,$userPass,$firstName,$lastName,
+	my ($userName,$firstName,$lastName,
 			$address1,$address2,$zipCode,$phone,
-				$emailAddress,$state,$city) = (0..10);
+				$emailAddress,$state,$city) = (0..9);
 
 
-	my $out_buffer = <<"OUT_HTML";
+	my $out_buffer = <<OUT_HTML;
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
@@ -38,17 +39,16 @@ sub display
         <script language="Javascript" src="/~abrooks/validation.js"> </script>
         <script language="Javascript" src="/~abrooks/common.js"> </script>
 	<script language="Javascript" type="text/javascript">	
-	var userName 	= $self->{PROFILE}->[$userName];
-	var userPass 	= $self->{PROFILE}->[$userPass];
-	var firstName 	= $self->{PROFILE}->[$firstName];
-	var lastName 	= $self->{PROFILE}->[$lastName];
-	var address1 	= $self->{PROFILE}->[$address1];
-	var address2 	= $self->{PROFILE}->[$address2];
-	var zipCode 	= $self->{PROFILE}->[$zipCode];
-	var phone 	= $self->{PROFILE}->[$phone];
-	var emailAddress = $self->{PROFILE}->[$emailAddress];
-	var state 	= $self->{PROFILE}->[$state];
-	var city 	= $self->{PROFILE}->[$city];
+	var userName 	= "$self->{PROFILE}->[$userName]";
+	var firstName 	= "$self->{PROFILE}->[$firstName]";
+	var lastName 	= "$self->{PROFILE}->[$lastName]";
+	var address1 	= "$self->{PROFILE}->[$address1]";
+	var address2 	= "$self->{PROFILE}->[$address2]";
+	var zipCode 	= "$self->{PROFILE}->[$zipCode]";
+	var phone 	= "$self->{PROFILE}->[$phone]";
+	var emailAddress = "$self->{PROFILE}->[$emailAddress]";
+	var state 	= "$self->{PROFILE}->[$state]";
+	var city 	= "$self->{PROFILE}->[$city]";
 	</script>
     </HEAD>
   <BODY onLoad="init_profile()">
@@ -56,9 +56,11 @@ sub display
 OUT_HTML
 
 	print $out_buffer;
-	display_header();
+
+	$self->display_header();
 	print StockUtil::slurp_file($div_register);
-	display_footer();
+	$self->display_footer();
+
 	$out_buffer = <<"OUT_HTML";	
 	
  </BODY>
@@ -68,3 +70,11 @@ OUT_HTML
 	print $out_buffer;
 
 }
+
+
+
+
+
+
+
+1;
