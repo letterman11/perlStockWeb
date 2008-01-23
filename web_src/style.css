@@ -6,21 +6,27 @@
 .paleyellow { color: #FFFF99 }
 .palegrey { color: #EFEFEF}
 .errtext { color: red; font-size: 10pt }
+.errtext_large { font-size: 16pt }
 .validation_register { color: red }
 .val_error { margin:0px; padding:0px; font-size: 10pt; font-family: arial; color: red; background-color: white; display: none; border:solid }
 .tbl_hd { background-color: #E0E0E0; text-align: center }
 .tbl_num1 { background-color: #D0D0D0; text-align: right }
 .tbl_num2 { background-color: #E8E8E8; text-align: right }
 .tbl_txt { text-align: left }
+.tbl_hd_stock_sym { background-color: darkgrey; color: white; text-align: center }
+.tbl_stock_sym { background-color: #D0D0D0; text-align: center }
 
-a.nolinkstyle  {
-  color: white;
-  padding:0;
-  margin:0;
-}
+/*
+.tbl_hd_stock_sym_link { color: white; text-align: center }
+*/
 
 td {
   min-height: 20px;
+}
+
+#banner_image {
+  border-width:0;
+
 }
 
 div {
@@ -33,7 +39,7 @@ div {
 #main {
   position:relative;
   width:100%;
-  height:auto;
+  height:105px;
 }
 
 #header {
@@ -49,11 +55,28 @@ div {
   left:0;
 }
 
+#stocklist_container {
+  float:left
+
+}
+
 #login {
   float: right;
 }
 
+#query {
+ float: left;
+}
+
+#sub_left_panel {
+  float:left;
+}
 
 #logged_on {
   float: right;
+}
+
+#stocklist_div {
+
+
 }
