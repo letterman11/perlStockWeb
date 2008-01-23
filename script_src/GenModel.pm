@@ -26,7 +26,7 @@ sub genSQL
 		my %requestParms = %{$self->{PARMS}};
 		my $page = defined $requestParms{page} ?  $requestParms{page} : 1 ;
 		my $rowsPerPage = $requestParms{rowsPerPage} if defined $requestParms{rowsPerPage};
-		$rowsPerPage = $rowsPerPage || 35;
+		$rowsPerPage = $rowsPerPage || 30;
 		$self->{ROWCOUNT} = scalar(@{$sessObj->{DATA}});
 		my $data = ();
 		my $i = 0;
