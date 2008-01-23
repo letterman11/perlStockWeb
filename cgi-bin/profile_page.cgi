@@ -41,6 +41,8 @@ if (defined($user_name) && ($user_name !~ /^\s*$/)) {
 
 		@profile_array = $sth->fetchrow_array;
 
+		$sth->finish();
+
 		$dbh->disconnect();
 
 	};
