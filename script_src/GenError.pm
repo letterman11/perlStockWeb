@@ -9,28 +9,34 @@ sub new
 {
         my $class = shift();
         my $self = {};
+	$self->{ERROBJ} = shift if @_;
         bless ($self,$class);
+	return $self;
 }
 
 sub display
 {
    my $self = shift(); 
    my $errstr = shift if @_;
-   
    my $out_buffer = ();
+ 
+   $errstr = exists($self->{ERROBJ}) && $self->{ERROBJ}->errText ? $self->{ERROBJ}->errText : $errstr;
+
 
    print StockUtil::headerHtml();
    $out_buffer = <<"OUT_HTML";
 <div id="main">
         <div id="banner">
-                   <img src="/~abrooks/DCBANNER_CROP2.jpg">
+                 <a  href="/~abrooks/registration.html">  <img id="banner_image" src="/~abrooks/DCBANNER_CROP2.jpg"> </a>
         </div>
-<div>
-
-<div id="app_error">
-	<span class="errtext"> <p> $errstr </p> </span>
 </div>
 
+<div id="app_error">
+	<span class="errtext_large"> <p> $errstr </p> </span>
+</div>
+
+</body>
+</html>
 OUT_HTML
    print $out_buffer;
    StockUtil::footerHtml();
