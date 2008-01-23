@@ -12,7 +12,7 @@ use CGI qw /:standard/;
 #use CGI::Carp qw(fatalsToBrowser);
 use CGI::Carp;
 use DBI;
-
+ 
 my $query = new CGI;
 my $callObj =  StockUtil::formValidation($query);
 

@@ -16,7 +16,7 @@ my $stocklist = ();
 my @stocklist_array;
 my $query = new CGI;
 
-
+ 
 my $dbconf = DbConfig->new();
 
 my $select_sql_str = "SELECT DISTINCT stock_symbol FROM orders"; 
