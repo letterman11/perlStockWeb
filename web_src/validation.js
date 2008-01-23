@@ -3,7 +3,7 @@ var reEmailValidation = /^\w+[\w.]+?\w+@\w+[\w.]+?\.{1}\w+\s*$/;
 var passLen = 6;
 var userLen = 6;
 var stock_UserID;
-var Instance = getCookie('Instance');
+//var Instance = getCookie('Instance');
 
 function goSubmit()
 {
@@ -16,7 +16,6 @@ function goSubmit()
 
 	//document.getElementsByTagName('iframe')[0].src = url;
 	document.getElementById('queryResult').src = url;
-//      window.open(url);
    }
 
 }
@@ -52,20 +51,23 @@ function init()
 {
 
    stock_SessionID = getCookie('stock_SessionID');
-   //alert('stockSessionID ' + stock_SessionID + 'length ' + stock_SessionID.length ); 
+  //alert('stockSessionID ' + stock_SessionID); 
 
-   if ((stock_SessionID != null || stock_SessionID != 'null') && (stock_SessionID.length >= stockIDLen)) {
+   if ((stock_SessionID != null && stock_SessionID != 'null')) {
       document.getElementById('login').style.display='none';
       document.getElementById('queryForm').style.visibility='visible';
       document.getElementById('query').style.visibility='visible';
       document.getElementById('logged_on').style.visibility='visible';
+      document.getElementById('stocklist_container').style.visibility='visible';
+      document.getElementById('stocklistResult').src = "/cgi-bin/populate_stocklist.cgi";
+      parent.top.document.frmStockApp.rowsPerPage.value = 25;
 
    }  
 }
 
 function init_profile()
 {
-	
+   document.getElementById('login').style.display='none';
    document.frmRegister.firstName.value = firstName;
    document.frmRegister.lastName.value = lastName;
    document.frmRegister.address1.value = address1;
@@ -75,11 +77,15 @@ function init_profile()
    document.frmRegister.state.value = firstName;
    document.frmRegister.firstName.value = firstName;
    document.frmRegister.phone.value = firstName;
+   document.frmRegister.email.value = emailAddress ;
+   document.frmRegister.submit.disabled = true ;
+
 //   document.frmRegister.state.value = firstName;
 //  document.frmRegister.state.value = firstName;
 
 
 }
+
 
 function validateRegistration()
 {
@@ -123,4 +129,16 @@ function logOut()
    for(i=0; i<arguments.length; i++) {
       eraseCookie(arguments[i]);
    }	
+}
+
+
+function setStockField()
+{
+	parent.top.document.frmStockApp.stkName.value = arguments[0];
+}
+
+
+function giveTop()
+{
+	return true;
 }
