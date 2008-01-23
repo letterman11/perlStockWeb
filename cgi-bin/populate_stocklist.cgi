@@ -12,6 +12,7 @@ use CGI qw /:standard/;
 use CGI::Carp qw(fatalsToBrowser);
 use DBI;
 
+my $stocklist = ();
 my @stocklist_array;
 my $query = new CGI;
 
@@ -34,7 +35,12 @@ eval {
 
 	$sth->execute();
 
-	@stocklist_array = $sth->fetchrow_array;
+	while( ($stocklist) = $sth->fetchrow_array ) {
+		push @stocklist_array, $stocklist;
+
+	}
+
+	$sth->finish();
 
 	$dbh->disconnect();
 
