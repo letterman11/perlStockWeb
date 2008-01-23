@@ -4,7 +4,6 @@ use strict;
 use Error;
 use GenReport;
 use GenError;
-use GenLogin;
 use SessionObject;
 use CGI::Cookie;
 use Storable;
@@ -168,19 +167,19 @@ sub formValidation
 	my $passLen = 6;
 	my $userLen = 6;
 
-	$sqlInsert{firstName} =	isset($query->param('firstName')) ? $query->param('firstName') : 'NULL';
-	$sqlInsert{lastName} =	isset($query->param('lastName')) ? $query->param('lastName') : 'NULL';
-	$sqlInsert{address1} =	isset($query->param('address1')) ? $query->param('address1') : 'NULL';
-	$sqlInsert{address2} =	isset($query->param('address2')) ? $query->param('address2') : 'NULL';
-	$sqlInsert{city} =	isset($query->param('city')) ? $query->param('city') : 'NULL';
-	$sqlInsert{state} =	isset($query->param('state')) ? $query->param('state') : 'NULL';
-	$sqlInsert{zipcode} =	isset($query->param('zipcode')) ? $query->param('zipcode') : 'NULL';
-	$sqlInsert{phone} =	isset($query->param('phone')) ? $query->param('phone') : 'NULL';
-	$sqlInsert{email} =	isset($query->param('email')) ? $query->param('email') : 'NULL';
-	$sqlInsert{userName} =	isset($query->param('userName')) ? $query->param('userName') : 'NULL';
-	$sqlInsert{password} =	isset($query->param('password')) ? $query->param('password') : 'NULL';
+	$sqlInsert{firstName} =	isset($query->param('firstName')) ? $query->param('firstName') : '';
+	$sqlInsert{lastName} =	isset($query->param('lastName')) ? $query->param('lastName') : '';
+	$sqlInsert{address1} =	isset($query->param('address1')) ? $query->param('address1') : '';
+	$sqlInsert{address2} =	isset($query->param('address2')) ? $query->param('address2') : '';
+	$sqlInsert{city} =	isset($query->param('city')) ? $query->param('city') : '';
+	$sqlInsert{state} =	isset($query->param('state')) ? $query->param('state') : '';
+	$sqlInsert{zipcode} =	isset($query->param('zipcode')) ? $query->param('zipcode') : '';
+	$sqlInsert{phone} =	isset($query->param('phone')) ? $query->param('phone') : '';
+	$sqlInsert{email} =	isset($query->param('email')) ? $query->param('email') : '';
+	$sqlInsert{userName} =	isset($query->param('userName')) ? $query->param('userName') : '';
+	$sqlInsert{password} =	isset($query->param('password')) ? $query->param('password') : '';
 
-	return Error->new(108) if($sqlInsert{email} eq 'NULL' || $sqlInsert{userName} eq 'NULL' || $sqlInsert{password} eq 'NULL');
+	return Error->new(108) if($sqlInsert{email} eq '' || $sqlInsert{userName} eq '' || $sqlInsert{password} eq '');
 
 	return Error->new(109) if($sqlInsert{email} !~ /\w+[\w.]+?\w+@\w+[\w.]+?\.\w+\s*$/);
 
