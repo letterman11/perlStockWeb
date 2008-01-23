@@ -49,7 +49,7 @@ if (ref $callObj eq 'Error') {
 
 	};
 
-	GenError->new(Error->new(102))->display("Application Error occurred try later\n") and die "$@" if ($@);
+	GenError->new(Error->new($DBI::err))->display("Application Error occurred try later\n") and die "$@" if ($@);
 
 	GenStatus->new()->display("Registration successful for $sqlHash->{userName}\n");
 }
