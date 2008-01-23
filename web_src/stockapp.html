@@ -12,10 +12,10 @@
 
 <div id="main">
 	<div id="banner">
-  	 <a class="nolinkstyle" href="/~abrooks/StockApp.html">	   <img src="/~abrooks/DCBANNER_CROP2.jpg">  </a>
+  	 <a  href="/~abrooks/stockapp.html">   <img id="banner_image" src="/~abrooks/DCBANNER_CROP2.jpg">  </a>
 	</div>
 
-	<div id="login" style="visibility:visible">
+	<div id="login" style="display:block">
 	  <form name="frmLogin" method="POST" action="../cgi-bin/authenticate.cgi">
 	     <table>
 	      <tr class="form_login">
@@ -34,13 +34,13 @@
 	  </form>
 	</div>
 
-	<div id="logged_on" style="visibility:hidden">
+	<div id="logged_on" style="visibility:visible">
          <span class="form_login">  
  	   <script language="Javascript" type="text/javascript">
 	     stock_UserID = getCookie('stock_UserID'); 
              if(stock_UserID != null && stock_UserID.length > 0) {
 		document.write(stock_UserID + " LOGGED IN | " + 
-	   	" <a href=\"/~abrooks/StockApp.html\" onclick=\"logOut('stock_UserID','stock_SessionID','Instance')\" target=\"_top\" > LOG OUT </a> " + 
+	   	" <a href=\"/~abrooks/stockapp.html\" onclick=\"logOut('stock_UserID','stock_SessionID','Instance')\" target=\"_top\" > LOG OUT </a> " + 
 	   	" | <a href=\"/cgi-bin/profile_page.cgi?userName=" + stock_UserID + "\">" +  " update profile </a> "); 
 	     }
 	  </script>
@@ -50,39 +50,49 @@
 
 </div>
 
-<div id="queryForm" style="visibility:hidden">
-    <form name="frmStockApp">
-     <table class="form_query">
-       <tr>
-        <td>Stock Name: </td> <td> <input name="stkName" type="text"> </td>
-        </tr>
-       <tr>    
-        <td>Min Price: </td> <td> <input name="minPrice" type="text"></td>
-       </tr>
-       <tr>
-         <td>Max Price: </td> <td><input name="maxPrice" type="text"></td>
-       </tr>
-       <tr>
-        <td>Min Quantity: </td> <td><input name="minQty" type="text"></td>
-       </tr>
-       <tr>
-        <td> Max Quantity: </td> <td><input name="maxQty" type="text"></td>
-      </tr>
-      <tr>
-         <td> # of rows:  </td> <td> <input name="rowsPerPage" type="text"> </td>
-      </tr>
-      <tr>
-        <td> <input type="button" name="btsubmit" value="SUBMIT" onClick="goSubmit()">  </td>
-        <td> <input type="button" name="btclear" value="CLEAR" onClick="clearFields(window.document)">  </td>
-      </tr>
-     </table>
+<div id="sub_left_panel">
+   <div id="queryForm" style="visibility:hidden">
+       <form id="frmStockApp" name="frmStockApp">
+        <table class="form_query">
+          <tr>
+           <td>Stock Name: </td> <td> <input name="stkName" type="text"> </td>
+           </tr>
+          <tr>    
+           <td>Min Price: </td> <td> <input name="minPrice" type="text"></td>
+          </tr>
+          <tr>
+            <td>Max Price: </td> <td><input name="maxPrice" type="text"></td>
+          </tr>
+          <tr>
+           <td>Min Quantity: </td> <td><input name="minQty" type="text"></td>
+          </tr>
+          <tr>
+           <td> Max Quantity: </td> <td><input name="maxQty" type="text"></td>
+         </tr>
+         <tr>
+            <td> # of rows:  </td> <td> <input name="rowsPerPage" type="text"> </td>
+         </tr>
+         <tr>
+           <td> <input type="button" name="btsubmit" value="SUBMIT" onClick="goSubmit()">  </td>
+           <td> <input type="button" name="btclear" value="CLEAR" onClick="clearFields(window.document)">  </td>
+         </tr>
+        </table>
     </form>
+   </div>
+
+   <div id="stocklist_container" style="visibility:hidden">
+     <iframe id="stocklistResult" name="stocklistframe" src="" height= "400"  width="200" frameborder="0" marginheight="0" marginwidth="5" >
+     </iframe>
+   </div>
+
+
+   <div id="query" style="visibility:visible">
+     <iframe id="queryResult" name="queryframe" height= "650" src="" width="700" frameborder="0" marginheight="0" marginwidth="5" >
+     </iframe>
+   </div>
+
 </div>
 
-<div id="query" style="visibility:hidden">
-  <iframe id="queryResult" name="queryframe" height= "600" src="" width="800" frameborder="0" marginheight="0" marginwidth="5" >
-  </iframe>
-</div>
 
  </BODY>
 </HTML>
