@@ -3,6 +3,7 @@
 use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
 use GenView;
+use GenLogin;
 use GenReport;
 use StockUtil;
 use DbConfig;
