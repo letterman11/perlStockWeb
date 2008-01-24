@@ -23,13 +23,14 @@ sub display
 
 	my $self = shift;
 	my $out_buffer;
+	my $rowcount = 0;
 	my $rowlen = 5;
+	my $flag = 0;
 	my @stocklist_array = @{$self->{STOCKLIST}};
 
 	my $stock_name = ();
 	my $old_stock_name = ();
 	my $div_id = ();
-	my ($i,$j) = ();
 	my ($true,$false) = (1,0);
 
 
@@ -37,18 +38,22 @@ sub display
 
         @stocklist_array = sort(@stocklist_array);	
 
+	carp("@stocklist_array " . scalar(@stocklist_array));
+
 	$out_buffer = "<html><head><title> stocklist </title> "
 		    . "<script language=\"Javascript\" src=\"/~abrooks/validation.js\" type=\"text/javascript\"> </script> "
 		    . "<LINK href='/~abrooks/style.css' rel='stylesheet' type='text/css'> "
 		    . "	</head>\n "
 		    . "<body> ";
 
-	for($i=0,$j=0; $i< scalar(@stocklist_array); $i++) 
+	for(my $i=0; $i < $i + $rowlen && $i< scalar(@stocklist_array); $i++) 
 	{
-
 		$stock_name = $stocklist_array[$i];
 		if(substr($stock_name,0,1) ne substr($old_stock_name,0,1)) 
 		{
+			$out_buffer .= "</table></div>\n" if $flag++;
+
+			$rowcount = 0;
 			$div_id = "stock_pre" . substr($stock_name,0,1);	
 			$out_buffer .= "<div id=\"$div_id\" class=\"stocklist_div\">\n"
 				    . "<table class=\"results\" cellspacing=\"1\" cellpadding=\"1\"> "
@@ -56,45 +61,23 @@ sub display
 				    . substr($stock_name,0,1) . "</a>" . "</th></tr>\n" 
 				    . "<tr class=\"tbl_stock_sym\">";
 				   
-			for($j=$i; ($j < $i + $rowlen) && ($j < scalar(@stocklist_array)); $j++)
-			{ 
-				$out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$j]')\" > $stocklist_array[$j] </a> </td>";
-				if(substr($stocklist_array[$j],0,1) ne substr($stocklist_array[$j+1],0,1))
-				{
-					$i=$j;
-					$flag_newdiv = $true;
-					last;
-				}
-			}
-
-			$out_buffer .= "</tr>\n";
+			$out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$i]')\" > $stocklist_array[$i] </a> </td>";
 
 		} else { 
 
-			$out_buffer .= "<tr  class=\"tbl_stock_sym\">";
-
-                        for($j=$i; ($j < $i + $rowlen) && ($j < scalar(@stocklist_array)); $j++)
-                        {
-                                $out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$j]')\"> $stocklist_array[$j] </a> </td>";
-                                if(substr($stocklist_array[$j],0,1) ne substr($stocklist_array[$j+1],0,1))
-                                {
-                                        $i=$j;
-                                        $flag_newdiv = $true;
-                                        last;
-                                }
-                        }
-
-			$out_buffer .= "</tr>\n";
+			$out_buffer .= "<tr class=\"tbl_stock_sym\">" if $rowcount == 0;
+			$out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$i]')\" > $stocklist_array[$i] </a> </td>";
 
 		}
 
-		if($flag_newdiv)
-		{
-			$out_buffer .= "</table> </div>\n";
-			$flag_newdiv = $false;		  
-		} 
+		$rowcount++;
+		if ($rowcount eq $rowlen) 
+		{ 
+			$out_buffer .= "</tr>\n";
+			$rowcount = 0;
+		}
 
-		$i=$j;
+
 		$old_stock_name = $stocklist_array[$i];
 	}	
 	
