@@ -23,7 +23,7 @@ sub display
    $out_buffer = <<"OUT_HTML";
 <div id="header">
         <div id="banner">
-                   <img src="/~abrooks/DCBANNER_CROP2.jpg">
+                   <img src="$::URL_PATHS->{BANNER_IMAGE}">
         </div>
 </div>
 

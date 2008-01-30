@@ -20,7 +20,7 @@ sub display_header
 	$out_buffer = <<"OUT_HTML";
 <div id="main">
         <div id="banner">
-         <a href="/~abrooks/stockapp.html">    <img id="banner_image" src="/~abrooks/DCBANNER_CROP2.jpg">  </a>
+         <a href="$::URL_PATHS->{STOCKAPP_HTM}">    <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}">  </a>
         </div>
 
         <div id="login" style="visibility:visible">
@@ -36,7 +36,7 @@ sub display_header
                   <td colspan="2"> <input type="submit"> <input type="reset"> </td>
               </tr>
               <tr class="form_login">
-                  <td> Not Registered?   Register <a href="/~abrooks/registration.html"> here </a> </td>
+                  <td> Not Registered?   Register <a href="$::URL_PATHS->{REGISTRATION_HTM}"> here </a> </td>
               </tr>
               </table>
           </form>
@@ -48,7 +48,7 @@ sub display_header
              stock_UserID = getCookie('stock_UserID');
              if(stock_UserID != null && stock_UserID.length > 0) {
                 document.write(stock_UserID + " LOGGED IN | " +
-                " <a href=/~abrooks/stockapp.html onclick=logOut('stock_UserID','stock_SessionID','Instance') target=_top > LOG OUT </a> " +
+                " <a href=$::URL_PATHS->{STOCKAPP_HTM} onclick=logOut('stock_UserID','stock_SessionID','Instance') target=_top > LOG OUT </a> " +
                 " | <a href=/cgi-bin/profile_page.cgi?userName=" + stock_UserID + ">" +  " update profile </a> ");
              }
           </script>

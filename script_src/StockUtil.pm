@@ -38,7 +38,7 @@ sub headerHtml
 	$buffer_out .= "<html>\n"
    	       .  " <head>\n"
     	       .  "<title> StockApp</title>\n"
- 	       .  "<LINK href='/~abrooks/style.css' rel='stylesheet' type='text/css'>\n"
+ 	       .  "<LINK href='$::URL_PATHS->{MAINSTYLE_CSS}' rel='stylesheet' type='text/css'>\n"
 	       .  "</head>\n"
 	       .  "<body>\n";
 	return $buffer_out;

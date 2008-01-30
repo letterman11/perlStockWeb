@@ -4,7 +4,6 @@ package GenStockList;
 use strict;
 use CGI;
 use CGI::Carp;
-use DBI;
 
 
 sub new
@@ -41,8 +40,8 @@ sub display
 	carp("@stocklist_array " . scalar(@stocklist_array));
 
 	$out_buffer = "<html><head><title> stocklist </title> "
-		    . "<script language=\"Javascript\" src=\"/~abrooks/validation.js\" type=\"text/javascript\"> </script> "
-		    . "<LINK href='/~abrooks/style.css' rel='stylesheet' type='text/css'> "
+		    . "<script language=\"Javascript\" src=\"$::URL_PATHS->{VALIDATION_JS}\" type=\"text/javascript\"> </script> "
+		    . "<LINK href='$::URL_PATHS->{MAINSTYLE_CSS}' rel='stylesheet' type='text/css'> "
 		    . "	</head>\n "
 		    . "<body> ";
 

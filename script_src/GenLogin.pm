@@ -25,7 +25,7 @@ sub display
    $out_buffer = <<"OUT_HTML";
 <div id="main">
         <div id="banner">
-                   <img src="/~abrooks/DCBANNER_CROP2.jpg">
+                   <img src="$::URL_PATHS->{BANNER_IMAGE}">
         </div>
 
         <div id="login" style="visibility:visible">
@@ -38,10 +38,10 @@ sub display
                   <td> password:  </td> <td> <input name="userPass" type="password"> </td>
               </tr>
               <tr class="form_login">
-                  <td colspan="2"> <input type="submit"> <input type="reset"> </td>
+                  <td colspan="2"> <input type="submit" value="Submit"> <input type="reset"> </td>
               </tr>
               <tr class="form_login">
-                  <td> Not Registered?   Register <a href="/~abrooks/registration.html"> here </a> </td>
+                  <td> Not Registered?   Register <a href="$::URL_PATHS->{REGISTRATION_HTM}"> here </a> </td>
               </tr>
               </table>
           </form>

@@ -5,9 +5,9 @@ package GenProfile;
 use strict;
 use CGI;
 use CGI::Carp;
-use DBI;
+use StockUtil;
 
-my $div_register = "../web_src/div_register.fhtm";
+my $div_register = $::URL_PATHS->{DIV_REGISTER_FHM};
 
 sub new
 {
@@ -36,8 +36,8 @@ sub display
   <HEAD>
     <TITLE>Stock Query Application - Registration </TITLE>
         <LINK href="/~abrooks/style.css" rel="stylesheet" type="text/css">
-        <script language="Javascript" src="/~abrooks/validation.js"> </script>
-        <script language="Javascript" src="/~abrooks/common.js"> </script>
+        <script language="Javascript" src="$::URL_PATHS->{VALIDATION_JS}"> </script>
+        <script language="Javascript" src="$::URL_PATHS->{COMMON_JS}"> </script>
 	<script language="Javascript" type="text/javascript">	
 	var userName 	= "$self->{PROFILE}->[$userName]";
 	var firstName 	= "$self->{PROFILE}->[$firstName]";
