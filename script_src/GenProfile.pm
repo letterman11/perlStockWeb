@@ -7,7 +7,6 @@ use CGI;
 use CGI::Carp;
 use StockUtil;
 
-my $div_register = $::URL_PATHS->{DIV_REGISTER_FHM};
 
 sub new
 {
@@ -35,7 +34,7 @@ sub display
 <HTML>
   <HEAD>
     <TITLE>Stock Query Application - Registration </TITLE>
-        <LINK href="/~abrooks/style.css" rel="stylesheet" type="text/css">
+        <LINK href="$::URL_PATHS->{MAINSTYLE_CSS}" rel="stylesheet" type="text/css">
         <script language="Javascript" src="$::URL_PATHS->{VALIDATION_JS}"> </script>
         <script language="Javascript" src="$::URL_PATHS->{COMMON_JS}"> </script>
 	<script language="Javascript" type="text/javascript">	
@@ -56,9 +55,8 @@ sub display
 OUT_HTML
 
 	print $out_buffer;
-
 	$self->display_header();
-	print StockUtil::slurp_file($div_register);
+	print StockUtil::slurp_file($::URL_PATHS->{DIV_REGISTER_FHM});
 	$self->display_footer();
 
 	$out_buffer = <<"OUT_HTML";	
@@ -67,6 +65,7 @@ OUT_HTML
  </HTML>
 
 OUT_HTML
+
 	print $out_buffer;
 
 }
