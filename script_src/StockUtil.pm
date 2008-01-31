@@ -9,7 +9,6 @@ use CGI::Cookie;
 use Storable;
 use Data::Dumper;
 require Session::Client;
-require '../cgi-bin/config.pl'; # temporary will go away
 
 BEGIN
 {
