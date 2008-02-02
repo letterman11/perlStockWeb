@@ -56,7 +56,7 @@ OUT_HTML
 
 	print $out_buffer;
 	$self->display_header();
-	print StockUtil::slurp_file($::URL_PATHS->{DIV_REGISTER_FHM});
+	print StockUtil::slurp_file($::URL_PATHS->{DIV_UPDATE_PROF_FHM});
 	$self->display_footer();
 
 	$out_buffer = <<"OUT_HTML";	
