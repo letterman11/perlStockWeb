@@ -11,6 +11,8 @@ use SessionObject;
 use CGI qw (:standard);
 use CGI::Carp qw(fatalsToBrowser);
 use Data::Dumper;
+require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
+
 
 my $sessInst = ();
 my $sessID = ();

@@ -12,6 +12,8 @@ use DbConfig;
 use CGI qw /:standard/;
 use CGI::Carp qw(fatalsToBrowser);
 use DBI;
+require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
+
 
 my @profile_array;
 my $query = new CGI;

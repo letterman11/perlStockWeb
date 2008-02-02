@@ -4,13 +4,15 @@ use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
 use GenView;
 use GenLogin;
-use GenReport;
 use StockUtil;
 use DbConfig;
 use CGI qw /:standard/;
 use CGI::Cookie;
 use CGI::Carp qw(fatalsToBrowser);
 use DBI;
+require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
+
+
 
 my $userID = 0;
 my $userName = 1;
