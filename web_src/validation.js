@@ -3,6 +3,11 @@ var reEmailValidation = /^\w+[\w.]+?\w+@\w+[\w.]+?\.{1}\w+\s*$/;
 var passLen = 6;
 var userLen = 6;
 var stock_UserID;
+var ERRCODE = {
+		 INVALID_PASSWORD : "Password length must be at least 6 characters",
+		 PASSWORD_MISMATCH : "Passwords do not match",
+
+	      }
 //var Instance = getCookie('Instance');
 
 function goSubmit()
@@ -68,20 +73,20 @@ function init()
 function init_profile()
 {
    document.getElementById('login').style.display='none';
-   document.frmRegister.firstName.value = firstName;
-   document.frmRegister.lastName.value = lastName;
-   document.frmRegister.address1.value = address1;
-   document.frmRegister.address2.value = address2;
-   document.frmRegister.zipcode.value = zipCode;
-   document.frmRegister.city.value = city;
-   document.frmRegister.state.value = firstName;
-   document.frmRegister.firstName.value = firstName;
-   document.frmRegister.phone.value = firstName;
-   document.frmRegister.email.value = emailAddress ;
-   document.frmRegister.submit.disabled = true ;
+   document.frmProfile1.firstName.value = firstName;
+   document.frmProfile1.lastName.value = lastName;
+   document.frmProfile1.address1.value = address1;
+   document.frmProfile1.address2.value = address2;
+   document.frmProfile1.zipcode.value = zipCode;
+   document.frmProfile1.city.value = city;
+   document.frmProfile1.state.value = firstName;
+   document.frmProfile1.firstName.value = firstName;
+   document.frmProfile1.phone.value = firstName;
+   document.frmProfile1.email.value = emailAddress ;
+  // document.frmProfile1.submit.disabled = true ;
+   document.frmProfile1.state.value = state ;
 
-//   document.frmRegister.state.value = firstName;
-//  document.frmRegister.state.value = firstName;
+
 
 
 }
@@ -121,6 +126,82 @@ function clearValidationRegistration()
    document.getElementById("val_email").style.display = "none";
    document.getElementById("val_username").style.display = "none";
    document.getElementById("val_password").style.display = "none";
+
+}
+
+function clearValidationProfile1()
+{
+   var regForm = arguments[0];
+   document.getElementById("val_email").style.visibility = "hidden";
+//   document.getElementById("val_username").style.visibility = "hidden";
+//   document.getElementById("val_password").style.visibility = "hidden";
+
+}
+
+
+function clearValidationProfile2()
+{
+   var regForm = arguments[0];
+
+//   document.getElementById("val_email").style.visibility = "hidden";
+   document.getElementById("val_password1").style.visibility = "hidden";
+   document.getElementById("val_password2").style.visibility = "hidden";
+
+}
+
+
+function validateProfile1()
+{
+   var regForm = arguments[0];
+   var state = true;
+
+   clearValidationProfile1(regForm);
+
+   var regForm = arguments[0];
+   if (! reEmailValidation.test(regForm.email.value)) {
+        document.getElementById("val_email").style.visibility = "visible";
+        state = false
+   }
+
+/*   if(regForm.userName.value.length < userLen) {
+        document.getElementById("val_username").style.visibility = "visible";
+        state = false
+   }
+*/
+   return false;
+//   return state;
+}
+
+function validateProfile2()
+{
+   var regForm = arguments[0];
+   var state = true;
+
+   clearValidationProfile2(regForm);
+
+   if(regForm.new_password.value != regForm.confirm_password.value) {
+
+	document.getElementById("val_password1").innerHTML = ERRCODE.PASSWORD_MISMATCH;
+	document.getElementById("val_password2").innerHTML = ERRCODE.PASSWORD_MISMATCH;
+        document.getElementById("val_password1").style.visibility = "visible";
+        document.getElementById("val_password2").style.visibility = "visible";
+	
+        state = false
+   }
+
+   if(regForm.new_password.value.length < passLen || regForm.confirm_password.value.length < passLen) {
+	document.getElementById("val_password1").innerHTML = ERRCODE.INVALID_PASSWORD;
+	document.getElementById("val_password2").innerHTML = ERRCODE.INVALID_PASSWORD;
+        document.getElementById("val_password1").style.visibility = "visible";
+        document.getElementById("val_password2").style.visibility = "visible";
+        state = false
+   }
+
+   
+
+
+   return false;
+//   return state;
 
 }
 
