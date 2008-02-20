@@ -1,26 +1,26 @@
 <div id="profile1">
    <form name="frmProfile1" method="POST" action="../cgi-bin/update_profile.cgi" onsubmit="return validateProfile1(document.frmProfile1)">
      <table>
-	<tr class="form_profile1">			
-	   <td> First Name: </td> <td> <input name="firstName" type="text"> </td> <td class="val_error"> </td>
+	<tr>			
+	   <td class="form_profile1"> First Name: </td> <td> <input name="firstName" type="text"> </td> <td class="val_error">&nbsp; </td>
 	</tr>
-	<tr class="form_profile1">			
-	   <td> Last Name: </td> <td> <input name="lastName" type="text"> </td> <td class="val_error"> &nbsp; </td>
+	<tr>			
+	   <td class="form_profile1"> Last Name: </td> <td> <input name="lastName" type="text"> </td> <td class="val_error"> &nbsp; </td>
 	</tr>
-	<tr class="form_profile1">			
-	   <td> Address1: </td> <td> <input name="address1" type="text"> </td> <td class="val_error"> </td>
+	<tr>			
+	   <td class="form_profile1"> Address1: </td> <td> <input name="address1" type="text"> </td> <td class="val_error"> </td>
 	</tr>
-	<tr class="form_profile1">			
-	   <td> Address2: </td> <td> <input name="address2" type="text"> </td> <td class="val_error"> </td>
+	<tr>			
+	   <td class="form_profile1"> Address2: </td> <td> <input name="address2" type="text"> </td> <td class="val_error"> </td>
 	</tr>
-	<tr class="form_profile1">			
-	   <td> Zip Code: </td> <td> <input name="zipcode" type="text"> </td> <td class="val_error"> </td>
+	<tr>			
+	   <td class="form_profile1"> Zip Code: </td> <td> <input name="zipcode" type="text"> </td> <td class="val_error"> </td>
 	</tr>
-	<tr class="form_profile1">
-	   <td> City: </td> <td> <input name="city" type="text"> </td> <td class="val_error"> </td>
+	<tr>
+	   <td class="form_profile1"> City: </td> <td> <input name="city" type="text"> </td> <td class="val_error"> </td>
 	</tr>
-	<tr class="form_profile1">			
-	   <td > State: </td> <td> <select id="state" name="state"><option value=""></option>
+	<tr>			
+	   <td class="form_profile1" > State: </td> <td> <select id="state" name="state"><option value=""></option>
 	<option value="AK">AK</option>
 	<option value="AL">AL</option>
 	<option value="AR">AR</option>
@@ -92,11 +92,11 @@
 	<option value="VI">VI</option></select></td> <td class="val_error"> &nbsp </td> 
 	</tr>	
 
-	<tr class="form_profile1">
-	   <td> Phone: </td> <td> <input name="phone" type="text"> </td> <td class="val_error"> </td>
+	<tr>
+	   <td class="form_profile1"> Phone: </td> <td> <input name="phone" type="text"> </td> <td class="val_error"> </td>
 	</tr>
-	<tr class="form_profile1">			
-	   <td> Email Address: </td> <td> <input name="email" type="text"> </td> <td class="val_error" id="val_email"> Invalid email address: use form joe@doe.com </td>
+	<tr>			
+	   <td class="form_profile1"> Email Address: </td> <td> <input name="email" type="text"> </td> <td class="val_error" id="val_email"> Invalid email address: use form joe@doe.com </td>
 	</tr>
 	<tr> <td> &nbsp; </td> <td> </td> </tr>
 	<tr> <td> <input type="submit" name="submit" value="SUBMIT"> </td> <td class="val_error"> </td> </tr> 
@@ -107,11 +107,11 @@
 <div id="profile2">
    <form name="frmProfile2" method="POST" action="../cgi-bin/update_profile.cgi" onsubmit="return validateProfile2(document.frmProfile2)">
      <table>
-        <tr class="form_profile2">
-           <td> New Password: </td> <td> <input name="new_password" type="password"> </td> <td class="val_error" id="val_password1">Invalid password: minimum length 6 characters </td>
+        <tr>
+           <td class="form_profile2"> New Password: </td> <td> <input name="new_password" type="password"> </td> <td class="val_error" id="val_password1">Invalid password: minimum length 6 characters </td>
         </tr>
-        <tr class="form_profile2">
-           <td> Confirm Password: </td> <td> <input name="confirm_password" type="password"> </td> <td class="val_error" id="val_password2">Invalid password: minimum length 6 characters </td>
+        <tr>
+           <td class="form_profile2"> Confirm Password: </td> <td> <input name="confirm_password" type="password"> </td> <td class="val_error" id="val_password2">Invalid password: minimum length 6 characters </td>
         </tr>
         <tr> <td> &nbsp; </td> <td> </td> </tr>
         <tr> <td> <input type="submit" name="submit" value="SUBMIT"> </td> <td class="val_error"> </td> </tr>
