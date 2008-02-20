@@ -3,11 +3,14 @@ var reEmailValidation = /^\w+[\w.]+?\w+@\w+[\w.]+?\.{1}\w+\s*$/;
 var passLen = 6;
 var userLen = 6;
 var stock_UserID;
-var ERRCODE = {
-		 INVALID_PASSWORD : "Password length must be at least 6 characters",
-		 PASSWORD_MISMATCH : "Passwords do not match",
 
-	      }
+
+var ERRCODE = { 
+		INVALID_PASSWORD:"Password length must be at least 6 characters", 
+			PASSWORD_MISMATCH:"Passwords do not match"
+		 };
+
+ 
 //var Instance = getCookie('Instance');
 
 function goSubmit()
@@ -58,13 +61,13 @@ function init()
    stock_SessionID = getCookie('stock_SessionID');
   //alert('stockSessionID ' + stock_SessionID); 
 
-   if ((stock_SessionID != null && stock_SessionID != 'null')) {
+  if ((stock_SessionID != null && stock_SessionID != 'null')) {
       document.getElementById('login').style.display='none';
       document.getElementById('queryForm').style.visibility='visible';
       document.getElementById('query').style.visibility='visible';
       document.getElementById('logged_on').style.visibility='visible';
-      document.getElementById('stocklist_container').style.visibility='visible';
-      document.getElementById('stocklistResult').src = "/cgi-bin/populate_stocklist.cgi";
+      document.getElementById('stockList_container').style.visibility='visible';
+      document.getElementById('stockListResult').src = "/cgi-bin/populate_stocklist.cgi";
       parent.top.document.frmStockApp.rowsPerPage.value = 25;
 
    }  
