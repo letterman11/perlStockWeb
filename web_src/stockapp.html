@@ -4,11 +4,13 @@
   <HEAD>
     <TITLE>Stock Query Application</TITLE>
 	<LINK href="/~abrooks/style.css" rel="stylesheet" type="text/css">
-	<script language="Javascript" src="/~abrooks/common.js"> </script>
-	<script language="Javascript" src="/~abrooks/validation.js"> </script>
+	<script type="text/javascript" src="/~abrooks/common.js"> </script>
+	<script type="text/javascript" src="/~abrooks/validation.js"> </script>
  
  </HEAD>
- <BODY onLoad="init()">
+
+
+<BODY onload="init()"> 
 
 <div id="main">
 	<div id="banner">
@@ -70,7 +72,14 @@
            <td> Max Quantity: </td> <td><input name="maxQty" type="text"></td>
          </tr>
          <tr>
-            <td> # of rows:  </td> <td> <input name="rowsPerPage" type="text"> </td>
+            <td> # of rows:  </td> <td> <select id="rowsPerPage" name="rowsPerPage">
+	        <option value="10">10</option>
+       		<option value="15">15</option>
+      		<option value="20">20</option>
+      		<option value="25">25</option>
+        	<option value="30">30</option>
+        	<option value="50">50</option>
+	</td>
          </tr>
          <tr>
            <td> <input type="button" name="btsubmit" value="SUBMIT" onClick="goSubmit()">  </td>
@@ -80,8 +89,8 @@
     </form>
    </div>
 
-   <div id="stocklist_container" style="visibility:hidden">
-     <iframe id="stocklistResult" name="stocklistframe" src="" height= "400"  width="200" frameborder="0" marginheight="0" marginwidth="5" >
+   <div id="stockList_container" style="visibility:hidden">
+     <iframe id="stockListResult" name="stocklistframe" src="" height= "400"  width="200" frameborder="0" marginheight="0" marginwidth="5" >
      </iframe>
    </div>
    <script language="Javascript" type="text/javascript">
