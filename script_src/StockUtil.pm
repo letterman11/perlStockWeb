@@ -8,7 +8,6 @@ use SessionObject;
 use CGI::Cookie;
 use Storable;
 use Data::Dumper;
-require Session::Client;
 
 BEGIN
 {
