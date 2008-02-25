@@ -16,7 +16,18 @@ require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
 
 
 my $query = new CGI;
-my $callObj =  StockUtil::formValidation($query);
+my $callObj = ();
+
+$callObj = StockUtil::validateSession();
+carp($callObj);
+
+if (ref $callObj eq 'Error') {
+
+	GenError->new($callObj)->display("Invalid form submission\n");
+	exit;
+}
+
+$callObj =  StockUtil::profileFormValidation($query);
 
 if (ref $callObj eq 'Error') {
 	GenError->new($callObj)->display("Invalid form submission\n");
@@ -27,12 +38,31 @@ if (ref $callObj eq 'Error') {
 
 	my $dbconf = DbConfig->new();
 
-	my $insert_sql_str = "INSERT INTO user VALUES ('$sqlHash->{userName}','$sqlHash->{userName}','$sqlHash->{password}'," 
-					. "'$sqlHash->{firstName}','$sqlHash->{lastName}','$sqlHash->{address1}','$sqlHash->{address2}',"
-					. "'$sqlHash->{zipcode}','$sqlHash->{phone}','$sqlHash->{email}','$sqlHash->{state}','$sqlHash->{city}')";
+	my $update_sql_str = ();
+
+	if ($sqlHash->{new_password} && $sqlHash->{confirm_password}) {
+
+		$update_sql_str .= "UPDATE user SET "
+				.  " USER_PASSWD = '$sqlHash->{new_password}' "
+				.  " WHERE USER_NAME = '$sqlHash->{userName}' ";
+
+	} else {
+
+		$update_sql_str .= "UPDATE user SET "
+				.  " FNAME = '$sqlHash->{firstName}', "
+				.  " LNAME = '$sqlHash->{lastName}', "
+				.  " ADDRESS1 = '$sqlHash->{address1}', "
+				.  " ADDRESS2 = '$sqlHash->{address2}', "
+				.  " ZIP_CODE = $sqlHash->{zipcode}, "
+				.  " PHONE = $sqlHash->{phone}, "
+				.  " STATE = '$sqlHash->{state}', "
+				.  " CITY = '$sqlHash->{city}' "
+				.  " WHERE USER_NAME = '$sqlHash->{userName}' ";
+
+	}
 
 
-	carp ("$insert_sql_str");
+	carp ("$update_sql_str");
 
 	my $dbh = DBI->connect( "dbi:mysql:"
 	                . $dbconf->dbName() . ":"
@@ -43,7 +73,7 @@ if (ref $callObj eq 'Error') {
                
 	eval {
 	
-		my $sth = $dbh->prepare($insert_sql_str);
+		my $sth = $dbh->prepare($update_sql_str);
 	
 		$sth->execute();
 
@@ -53,7 +83,7 @@ if (ref $callObj eq 'Error') {
 
 	GenError->new(Error->new($DBI::err))->display("Application Error occurred try later\n") and die "$@" if ($@);
 
-	GenStatus->new()->display("Registration successful for $sqlHash->{userName}\n");
+	GenStatus->new()->display("Update of profile successful for $sqlHash->{userName}\n");
 }
 
 exit;
