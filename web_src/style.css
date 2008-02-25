@@ -5,13 +5,11 @@
 .form_profile2 { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; background-color: #E3E3E3 } 
 .form_query { font-size: 10pt; font-family: arial; background-color: #E3E3E3 }
 .list { color: black; font-size: 14pt; font-family: Arial;   }
-.paleyellow { color: #FFFF99 }
-.palegrey { color: #EFEFEF}
 .errtext { color: red; font-size: 10pt }
-.errtext_large { font-size: 16pt }
+.errtext_large { color: red; font-size: 16pt }
+.text_large { font-size: 16pt }
 .validation_register { color: red }
-/* .val_error { margin:0px; padding:0px; font-size: 10pt; font-family: arial; color: red; background-color: white; display: none; border:solid } */
-.val_error { margin:0px; padding:0px; font-size: 10pt; font-family: arial; color: red; background-color: white; visibility: hidden; border:solid }
+.val_error { margin:0px; padding:0px; font-size: 10pt; font-family: arial; color: red; background-color: white; visibility: hidden; border:none } 
 .tbl_hd { background-color: #E0E0E0; text-align: center }
 .tbl_num1 { background-color: #D0D0D0; text-align: right }
 .tbl_num2 { background-color: #E8E8E8; text-align: right }
@@ -19,9 +17,6 @@
 .tbl_hd_stock_sym { background-color: darkgrey; color: white; text-align: center }
 .tbl_stock_sym { background-color: #D0D0D0; text-align: center }
 
-/*
-.tbl_hd_stock_sym_link { color: white; text-align: center }
-*/
 
 td {
   min-height: 20px;

@@ -28,6 +28,9 @@ my %err_codes = (
 			109 => undef,
 			110 => undef,
 			111 => undef,
+			112 => undef,
+			113 => undef,
+			114 => undef,
 			1062 => "User name or email address has already been taken",
 			ERRCOND => undef,
 		);	

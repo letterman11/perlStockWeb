@@ -23,13 +23,13 @@ sub display
    $out_buffer = <<"OUT_HTML";
 <div id="header">
         <div id="banner">
-                   <img src="$::URL_PATHS->{BANNER_IMAGE}">
+	<a href="$::URL_PATHS->{STOCKAPP_HTM}"> <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}"> </a>
         </div>
 </div>
 
 <div id="app_status">
 
-	<span class="errtext"> <p> $errstr </p> </span>
+	<span class="text_large"> <p> $errstr </p> </span>
 </div>
 
 OUT_HTML

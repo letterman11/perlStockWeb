@@ -27,7 +27,7 @@ sub display
    $out_buffer = <<"OUT_HTML";
 <div id="main">
         <div id="banner">
-                 <a  href="$::URL_PATHS->{REGISTRATION_HTM}">  <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}"> </a>
+                 <a  href="$::URL_PATHS->{STOCKAPP_HTM}">  <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}"> </a>
         </div>
 </div>
 

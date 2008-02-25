@@ -12,6 +12,8 @@ use CGI qw /:standard/;
 #use CGI::Carp qw(fatalsToBrowser);
 use CGI::Carp;
 use DBI;
+require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
+
  
 my $query = new CGI;
 my $callObj =  StockUtil::formValidation($query);

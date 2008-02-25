@@ -146,12 +146,12 @@ sub validateSession
         my ($sessionID,$userID)  = ();
 
         my %cookies = fetch CGI::Cookie;
-        return $false unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});
+        return Error->new(104) unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});
 
         $sessionID = $cookies{'stock_SessionID'}->value;
         $userID = $cookies{'stock_UserID'}->value;
 
-	return Error->new(103) 	if not -e "/tmp/$sessionID";
+	return Error->new(104) 	if not -e "/tmp/$sessionID";
 
 	my $sessionObject = retrieve("/tmp/$sessionID") || return Error->new(103);
 
@@ -188,6 +188,45 @@ sub formValidation
 
 	return \%sqlInsert;
 }
+
+sub profileFormValidation
+{
+
+	my $query = shift;
+	my %sqlUpdate = ();
+	my $passLen = 6;
+	my $userLen = 6;
+
+	$sqlUpdate{new_password} =  isset($query->param('new_password')) ? $query->param('new_password') : '';
+	$sqlUpdate{confirm_password} =  isset($query->param('confirm_password')) ? $query->param('confirm_password') : '';
+	$sqlUpdate{userName} =	isset($query->param('userName')) ? $query->param('userName') : '';
+
+	return Error->new(110) if($sqlUpdate{userName} eq '' || length($sqlUpdate{userName}) < $userLen); 
+
+	if (length($sqlUpdate{new_password}) >= $passLen &&  length($sqlUpdate{confirm_password})  >= $passLen) {
+ 
+		return Error->new(112) if $sqlUpdate{new_password} ne $sqlUpdate{confirm_password};
+		return \%sqlUpdate;
+
+	} else {
+
+		return Error->new(112) if (length($sqlUpdate{new_password}) > 0 || length($sqlUpdate{confirm_password}) > 0);
+
+		$sqlUpdate{firstName} = isset($query->param('firstName')) ? $query->param('firstName') : '';
+		$sqlUpdate{lastName} =  isset($query->param('lastName')) ? $query->param('lastName') : '';
+        	$sqlUpdate{address1} =  isset($query->param('address1')) ? $query->param('address1') : '';
+        	$sqlUpdate{address2} =  isset($query->param('address2')) ? $query->param('address2') : '';
+        	$sqlUpdate{city} =      isset($query->param('city')) ? $query->param('city') : '';
+        	$sqlUpdate{state} =     isset($query->param('state')) ? $query->param('state') : '';
+        	$sqlUpdate{zipcode} =   isset($query->param('zipcode')) ? $query->param('zipcode') : '';
+        	$sqlUpdate{phone} =     isset($query->param('phone')) ? $query->param('phone') : '';
+
+		return \%sqlUpdate;
+		
+	}
+
+}
+
 
 sub slurp_file
 {

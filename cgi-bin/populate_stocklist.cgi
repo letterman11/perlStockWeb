@@ -6,11 +6,11 @@ use GenStatus;
 use GenError;
 use Error;
 use GenStockList;
-use StockUtil;
 use DbConfig;
 use CGI qw /:standard/;
 use CGI::Carp qw(fatalsToBrowser);
 use DBI;
+require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
 
 my $stocklist = ();
 my @stocklist_array;
@@ -48,6 +48,7 @@ eval {
 
 	GenError->new(Error->new(102))->display("Application Error occurred try again later\n") and die "$@" if ($@);
 
+	carp ("@stocklist_array");
 	print header;
 	GenStockList->new(\@stocklist_array)->display();
 

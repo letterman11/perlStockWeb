@@ -3,7 +3,8 @@ var reEmailValidation = /^\w+[\w.]+?\w+@\w+[\w.]+?\.{1}\w+\s*$/;
 var passLen = 6;
 var userLen = 6;
 var stock_UserID;
-
+var phoneLen = 10;
+var zipcodeLen = 5;
 
 var ERRCODE = { 
 		INVALID_PASSWORD:"Password length must be at least 6 characters", 
@@ -84,10 +85,12 @@ function init_profile()
    document.frmProfile1.city.value = city;
    document.frmProfile1.state.value = firstName;
    document.frmProfile1.firstName.value = firstName;
-   document.frmProfile1.phone.value = firstName;
+   document.frmProfile1.phone.value = phone;
    document.frmProfile1.email.value = emailAddress ;
-  // document.frmProfile1.submit.disabled = true ;
+   document.frmProfile1.email.disabled = true ;
    document.frmProfile1.state.value = state ;
+   document.frmProfile1.userName.value = userName ;
+   document.frmProfile2.userName.value = userName ;
 
 
 
@@ -104,21 +107,26 @@ function validateRegistration()
 
    var regForm = arguments[0];
    if (! reEmailValidation.test(regForm.email.value)) {
-	document.getElementById("val_email").style.display = "block";
+	document.getElementById("val_email").style.visibility = "visible";
         state = false
    }
 
    if(regForm.userName.value.length < userLen) {
-        document.getElementById("val_username").style.display = "block";
+        document.getElementById("val_username").style.visibility = "visible";
         state = false
    }
 
    if(regForm.password.value.length < passLen) {
-	document.getElementById("val_password").style.display = "block";
+	document.getElementById("val_password").style.visibility = "visible";
         state = false
    }
 
-//   return false;
+   regForm.zipcode.value = regForm.zipcode.value.replace(/\D*/g,"");
+   regForm.zipcode.value = regForm.zipcode.value.substring(0,zipcodeLen);
+
+   regForm.phone.value = regForm.phone.value.replace(/\D*/g,"");
+   regForm.phone.value = regForm.phone.value.substring(0,phoneLen);
+   
    return state;
 
 }
@@ -126,9 +134,9 @@ function validateRegistration()
 function clearValidationRegistration()
 {
    var regForm = arguments[0]; 
-   document.getElementById("val_email").style.display = "none";
-   document.getElementById("val_username").style.display = "none";
-   document.getElementById("val_password").style.display = "none";
+   document.getElementById("val_email").style.visibility = "hidden";
+   document.getElementById("val_username").style.visibility = "hidden";
+   document.getElementById("val_password").style.visibility = "hidden";
 
 }
 
@@ -136,8 +144,6 @@ function clearValidationProfile1()
 {
    var regForm = arguments[0];
    document.getElementById("val_email").style.visibility = "hidden";
-//   document.getElementById("val_username").style.visibility = "hidden";
-//   document.getElementById("val_password").style.visibility = "hidden";
 
 }
 
@@ -146,7 +152,6 @@ function clearValidationProfile2()
 {
    var regForm = arguments[0];
 
-//   document.getElementById("val_email").style.visibility = "hidden";
    document.getElementById("val_password1").style.visibility = "hidden";
    document.getElementById("val_password2").style.visibility = "hidden";
 
@@ -160,19 +165,27 @@ function validateProfile1()
 
    clearValidationProfile1(regForm);
 
+
+   regForm.zipcode.value = regForm.zipcode.value.replace(/\D*/g,"");
+   regForm.zipcode.value = regForm.zipcode.value.substring(0,zipcodeLen);
+
+   regForm.phone.value = regForm.phone.value.replace(/\D*/g,"");
+   regForm.phone.value = regForm.phone.value.substring(0,phoneLen);
+
+/*
    var regForm = arguments[0];
    if (! reEmailValidation.test(regForm.email.value)) {
         document.getElementById("val_email").style.visibility = "visible";
         state = false
    }
 
-/*   if(regForm.userName.value.length < userLen) {
+   if(regForm.userName.value.length < userLen) {
         document.getElementById("val_username").style.visibility = "visible";
         state = false
    }
 */
-   return false;
-//   return state;
+
+   return state;
 }
 
 function validateProfile2()
@@ -200,11 +213,7 @@ function validateProfile2()
         state = false
    }
 
-   
-
-
-   return false;
-//   return state;
+   return state;
 
 }
 
