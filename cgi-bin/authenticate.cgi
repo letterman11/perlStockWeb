@@ -19,7 +19,7 @@ my $userName = 1;
 my $userPass = 2;
 my $startpage="/home/abrooks/www/StockApp/web_src/stockapp.html";
 my $query = new CGI;
-
+my $host = $::GLOBALS->{HOST}; # !!! change for production server to dcoda.net
 
 my $dbconf = DbConfig->new();
 my $dbh = DBI->connect( "dbi:mysql:"  
@@ -55,16 +55,19 @@ if (not defined ($user_row[1])) {
 	my $c1 = new CGI::Cookie(-name=>'stock_SessionID',
 			-value=>$stockSessionID,
 			-expires=>undef, 
+			-domain=>$host,  
 			-path=>'/');
 
 	my $c2 = new CGI::Cookie(-name=>'stock_UserID',
 			-value=>$user_name,
 			-expires=>undef, 
+			-domain=>$host, 
 			-path=>'/');
 
 	my $c3 = new CGI::Cookie(-name=>'Instance',
 			-value=>$sessionInstance,
 			-expires=>undef, 
+			-domain=>$host,  
 			-path=>'/');
 
 	print "Set-Cookie: $c1\n";

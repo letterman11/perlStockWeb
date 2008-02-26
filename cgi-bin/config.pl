@@ -18,4 +18,7 @@ $::URL_PATHS =  {
                        VALIDATION_JS           => "/~abrooks/validation.js",
                        COMMON_JS               => "/~abrooks/common.js",
                };
+$::GLOBALS	= {
+			HOST			=> ""
 
+		};
