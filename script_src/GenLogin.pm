@@ -51,7 +51,7 @@ sub display
 
 OUT_HTML
    print $out_buffer;
-   StockUtil::footerHtml();
+   print StockUtil::footerHtml();
 }
 
 
