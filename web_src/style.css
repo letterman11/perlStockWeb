@@ -1,4 +1,5 @@
 .results {font-size: 10pt; font-family: arial; border: none; }
+table.results2  {font-size: 10pt; font-family: arial; border: none;}
 .form_login { font-size: 10pt; font-family: arial; background-color: #E3E3E3 }
 .form_register { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; background-color: #E3E3E3 } 
 .form_profile1 { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; background-color: #E3E3E3 } 
@@ -14,8 +15,9 @@
 .tbl_num1 { background-color: #D0D0D0; text-align: right }
 .tbl_num2 { background-color: #E8E8E8; text-align: right }
 .tbl_txt { text-align: left }
-.tbl_hd_stock_sym { background-color: darkgrey; color: white; text-align: center }
+.tbl_hd_stock_sym { background-color: #A0A0A0; text-align: center }
 .tbl_stock_sym { background-color: #D0D0D0; text-align: center }
+a:visited { color: blue; }
 
 
 td {
@@ -74,7 +76,5 @@ div {
   float: right;
 }
 
-#stocklist_div {
 
 
-}
