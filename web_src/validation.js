@@ -11,6 +11,10 @@ var ERRCODE = {
 			PASSWORD_MISMATCH:"Passwords do not match"
 		 };
 
+var DIV_INDEX = {
+		A:0, B:2, C:3
+	      };
+
  
 //var Instance = getCookie('Instance');
 
@@ -23,7 +27,7 @@ function goSubmit()
         url += "stkName=" +escape(handle.frmStockApp.stkName.value) + "&minPrice=" +handle.frmStockApp.minPrice.value + "&maxPrice=" +handle.frmStockApp.maxPrice.value
 	  + "&minQty=" +handle.frmStockApp.minQty.value + "&maxQty=" +handle.frmStockApp.maxQty.value + "&rowsPerPage=" +handle.frmStockApp.rowsPerPage.value;
 
-	//document.getElementsByTagName('iframe')[0].src = url;
+//	alert(url);
 	document.getElementById('queryResult').src = url;
    }
 
@@ -225,13 +229,25 @@ function logOut()
 }
 
 
-function setStockField()
+function setStockField(stock,div)
 {
-	parent.top.document.frmStockApp.stkName.value = arguments[0];
+	parent.top.document.frmStockApp.stkName.value = stock;
+	parent.top.document.getElementById('p_big_stock').innerHTML = stock;
+	div.style.zIndex = DIV_INDEX.A;	
+//	div.style.zIndex = 0;	
+//	alert(div.style.zIndex);	
+	//alert(DIV_INDEX.charAt(length-1));	
 }
 
-
-function giveTop()
+function changeBigStock(form)
 {
-	return true;
+	parent.top.document.getElementById('p_big_stock').innerHTML = form.frmStockApp.stkName.value.toUpperCase();
+
+}
+
+function giveTop(div)
+{
+	div.style.zIndex = 100;
+//	alert(div.style.zIndex);		
+	//return true;
 }

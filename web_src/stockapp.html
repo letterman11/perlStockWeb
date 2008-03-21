@@ -48,8 +48,6 @@
 	  </script>
 	 </span>
 	</div>
-
-
 </div>
 
 <div id="sub_left_panel">
@@ -57,7 +55,7 @@
        <form id="frmStockApp" name="frmStockApp">
         <table class="form_query">
           <tr>
-           <td>Stock Name: </td> <td> <input name="stkName" type="text"> </td>
+           <td>Stock Name: </td> <td> <input name="stkName" type="text" onBlur="changeBigStock(document);"> </td>
            </tr>
           <tr>    
            <td>Min Price: </td> <td> <input name="minPrice" type="text"></td>
@@ -85,18 +83,27 @@
            <td> <input type="button" name="btsubmit" value="SUBMIT" onClick="goSubmit()">  </td>
            <td> <input type="button" name="btclear" value="CLEAR" onClick="clearFields(window.document)">  </td>
          </tr>
+          <tr>
+           <td> <input name="sortCriteria" type="hidden"> </td> 
+	   <td> <input name="sortCountPrice" type="hidden"> <input name="sortCountOrder" type="hidden"> <input name="sortCountDate" type="hidden"></td>
+         </tr>
         </table>
     </form>
    </div>
+   <div id="big_stock">
+ 	<p id="p_big_stock">      </p>
+   </div>
 
-   <div id="stockList_container" style="visibility:hidden">
-     <iframe id="stockListResult" name="stocklistframe" src="" height= "400"  width="200" frameborder="0" marginheight="0" marginwidth="5" >
+</div>
+
+ <div id="stockList_container" style="visibility:hidden">
+     <iframe id="stockListResult" name="stocklistframe" src="" height= "400"  width="250" frameborder="0" marginheight="0" marginwidth="5" >
      </iframe>
    </div>
    <script language="Javascript" type="text/javascript">
     if (window.screen.width <= 1024) {
        document.write( '  <div id="query" style="visibility:visible"> ' +
-           '<iframe id="queryResult" name="queryframe" height= "650" src="" width="500" frameborder="0" marginheight="0" marginwidth="5" > ' +
+           '<iframe id="queryResult" name="queryframe" height= "650" src="" width="475" frameborder="0" marginheight="0" marginwidth="5" > ' +
         ' </iframe> ' +
       ' </div> ');
         
@@ -115,7 +122,6 @@
    </div>
 -->
 
-</div>
 
 
  </BODY>

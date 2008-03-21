@@ -70,9 +70,9 @@ if (not defined ($user_row[1])) {
 			-domain=>$host,  
 			-path=>'/');
 
-	print "Set-Cookie: $c1\n";
-	print "Set-Cookie: $c2\n";
-	print "Set-Cookie: $c3\n";
+#	print "Set-Cookie: $c1\n";
+#	print "Set-Cookie: $c2\n";
+#	print "Set-Cookie: $c3\n";
 
 	StockUtil::storeSession($sessionInstance,
 				$stockSessionID, 
@@ -80,7 +80,8 @@ if (not defined ($user_row[1])) {
 
 	my $out_page = StockUtil::slurp_file($startpage);
 
-	print header;
+	print header(-cookie=>[$c1,$c2,$c3]);
+#	print header;
 	print $out_page, "\n";
 
 }

@@ -37,6 +37,7 @@ sub headerHtml
    	       .  " <head>\n"
     	       .  "<title> StockApp</title>\n"
  	       .  "<LINK href='$::URL_PATHS->{MAINSTYLE_CSS}' rel='stylesheet' type='text/css'>\n"
+	       .  "<script type='text/javascript' src='$::URL_PATHS->{COMMON_JS}'> </script>\n"
 	       .  "</head>\n"
 	       .  "<body>\n";
 	return $buffer_out;

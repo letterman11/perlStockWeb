@@ -55,17 +55,17 @@ sub display
 			$rowcount = 0;
 			$div_id = "stock_pre" . substr($stock_name,0,1);	
 			$out_buffer .= "<div id=\"$div_id\" class=\"stocklist_div\">\n"
-				    . "<table class=\"results\" cellspacing=\"1\" cellpadding=\"1\"> "
-				    . "<tr class=\"tbl_hd_stock_sym\"><th width=\"100%\"><a class=\"tbl_hd_stock_sym_link\" href=\"javascript:void 0\" onclick=\"giveTop(this)\"> " 
+				    . "<table class=\"results2\"  cellspacing=\"1\" cellpadding=\"1\"> "
+				    . "<tr class=\"tbl_hd_stock_sym\"><th width=\"100%\" colspan=\"100%\"><a class=\"tbl_hd_stock_sym_link\" href=\"javascript:void 0\" onclick=\"giveTop($div_id)\"> " 
 				    . substr($stock_name,0,1) . "</a>" . "</th></tr>\n" 
 				    . "<tr class=\"tbl_stock_sym\">";
 				   
-			$out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$i]')\" > $stocklist_array[$i] </a> </td>";
+			$out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$i]',$div_id)\" > $stocklist_array[$i] </a> </td>";
 
 		} else { 
 
 			$out_buffer .= "<tr class=\"tbl_stock_sym\">" if $rowcount == 0;
-			$out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$i]')\" > $stocklist_array[$i] </a> </td>";
+			$out_buffer .= "<td> <a href=\"javascript: void 0\" onclick=\"setStockField('$stocklist_array[$i]',$div_id)\" > $stocklist_array[$i] </a> </td>";
 
 		}
 

@@ -5,7 +5,11 @@ use strict;
 
 sub stockHeaderHtml
 {
-	return "<tr class='tbl_hd'><th> TA NUMBER </th><th> STOCK SYMBOL</th><th> LIMIT PRICE </th><th> ORDER QUANTITY </th> </tr>\n";
+#	return "<tr class='tbl_hd'><th> TA NUMBER </th><th> FIRM SYMBOL </th><th> LIMIT PRICE </th><th> ORDER QUANTITY </th> <th> ORDER DATE </th> </tr>\n";
+
+	return "<tr class='tbl_hd'><th> TA NUMBER </th><th> FIRM SYMBOL </th> " 
+		. " <th> <a href='javascript:tblSort(\"PRICE\")'>  LIMIT PRICE </a> </th> <th> <a href='javascript:tblSort(\"ORDER\")'> ORDER QUANTITY </a> </th> "
+		. " <th>  <a href='javascript:tblSort(\"DATE\")'> ORDER DATE  </a> </th> </tr>\n ";
 
 }
 
@@ -30,14 +34,15 @@ sub display
 	my $buffer_out = ();
    
 	$buffer_out  = StockUtil::headerHtml();
-	$buffer_out .= "<table class='results' width=65%  cellspacing='1' cellpadding='1' border='0' align='left' >\n";
+	$buffer_out .= "<table class='results' width='100%'  cellspacing='1' cellpadding='1' border='0' align='left' >\n";
 	$buffer_out .= stockHeaderHtml();
 	my  ($i,$alt) = 0;
 	foreach my $row (@{$self->{DATA}}) {
-		my ($ta_number, $stock_symbol, $limit_price, $order_quantity) = @$row;
+		my ($ta_number, $firm_symbol, $limit_price, $order_quantity, $order_datetime) = @$row;
 		$alt =  (++$i % 2 ? 1 : 2);
 		$buffer_out .= "<tr class='tbl_num$alt'><td class='tbl_txt'> $ta_number </td> "  
-	 	            .  "<td class='tbl_txt' width=25%> $stock_symbol</td><td> $limit_price </td><td> $order_quantity</td></tr>\n";
+	 	            .  "<td class='tbl_txt' width=25%> $firm_symbol</td><td> $limit_price </td><td> $order_quantity</td> "
+			    .  "<td> $order_datetime </td></tr>\n";
 
 	} 
 	$buffer_out .= "\n</table>\n";
@@ -53,14 +58,15 @@ sub display2
 	my $buffer_out = ();
    
 	$buffer_out  = StockUtil::headerHtml();
-	$buffer_out .= "<table class='results' width=65%  cellspacing='1' cellpadding='1' border='0' align='left' >\n";
+	$buffer_out .= "<table class='results' width=100% cellspacing='1' cellpadding='1' border='0' align='left' >\n";
 	$buffer_out .= stockHeaderHtml();
 	my  ($i,$alt) = 0;
 	foreach my $row (@{$self->{DATA}}) {
-		my ($ta_number, $stock_symbol, $limit_price, $order_quantity) = @$row;
+		my ($ta_number, $firm_symbol, $limit_price, $order_quantity, $order_datetime) = @$row;
 		$alt =  (++$i % 2 ? 1 : 2);
-		$buffer_out .= "<tr class='tbl_num$alt'><td class='tbl_txt'> $ta_number </td> "  
-	 	            .  "<td class='tbl_txt' width=25%> $stock_symbol</td><td> $limit_price </td><td> $order_quantity</td></tr>\n";
+		$buffer_out .= "<tr class='tbl_num$alt'><td class='tbl_txt' width='15%'> $ta_number </td> "  
+	 	            .  "<td class='tbl_txt' width='10%'> $firm_symbol</td><td width='15%'> $limit_price </td><td width='15%'> $order_quantity</td> "
+			    .  "<td width='30%'> $order_datetime </td></tr>\n";
 
 	} 
 	$buffer_out .= "<tr class='results'><td colspan='100%'>";

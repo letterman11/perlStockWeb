@@ -32,11 +32,12 @@ if (ref $initSessionObject eq 'SessionObject') {
        my $model = GenModel->new(\%params);
     
        $model->genSQL();
-       my ($data, $rowcount) = $model->execIndexQuery();
+       my ($data, $rowcount, $sort) = $model->execIndexQuery();
        my $sessionObject = SessionObject->new($sessInst,
     					 $sessID,
     					 $data,
-    					 $rowcount);
+    					 $rowcount,
+					 $sort);
     
        StockUtil::storeSessionObject($sessionObject);
     

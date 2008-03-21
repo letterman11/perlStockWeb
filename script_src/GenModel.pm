@@ -32,7 +32,8 @@ sub genSQL
 		my $i = 0;
 		my $j = 0;
 
-		my $sqlStr = "SELECT ta_number, stock_symbol, limit_price, order_quantity from orders WHERE  ta_number in ( ";
+		my $sqlStr = "SELECT ta_number, firm_symbol, limit_price, order_quantity, original_order_datetime from orders WHERE  ta_number in ( ";
+
 		my $totRows = scalar(@{$sessObj->{DATA}});
 
 	  	if ($page > 1) {
@@ -45,17 +46,53 @@ sub genSQL
 		}
 		
 
-		carp(Dumper($sessObj->{DATA}));
-		carp("$i ########### $j");
+		carp(Dumper($sessObj));
 				
 		$data = $sessObj->{DATA}->[$i];
+
 		$sqlStr .= " '$data' ";
+
 		for(++$i; $i < $j; $i++) {
 			$data = $sessObj->{DATA}->[$i];
 			$sqlStr .= ", '$data'"; 
 		}
 
-		$sqlStr .= " ) ORDER BY limit_price, order_quantity ";
+
+                if ((not defined $sessObj->{SORT}) || ($sessObj->{SORT} =~ /^\s*$/))
+                {
+                        $sqlStr .= " ) ORDER BY limit_price ASC, order_quantity  ";
+                }
+                else
+                {
+
+                        if ($sessObj->{SORT} eq "SORT_PRICE_DESC")
+                        {
+                                $sqlStr .= " )  ORDER BY limit_price DESC, order_quantity ";
+                        }
+                        elsif ($sessObj->{SORT} eq "SORT_PRICE_ASC")
+                        {
+                                $sqlStr .= " )  ORDER BY limit_price ASC, order_quantity ";
+                        }
+                        elsif ($sessObj->{SORT} eq "SORT_ORDER_ASC")
+                        {
+                                $sqlStr .= " )  ORDER BY order_quantity ASC, limit_price ";
+                        }
+                        elsif ($sessObj->{SORT} eq "SORT_ORDER_DESC")
+                        {
+                                $sqlStr .= " )  ORDER BY order_quantity DESC, limit_price ";
+                        }
+                        elsif ($sessObj->{SORT} eq "SORT_DATE_DESC")
+                        {
+                                $sqlStr .= " )  ORDER BY original_order_datetime DESC, limit_price ";
+                        }
+                        elsif ($sessObj->{SORT} eq "SORT_DATE_ASC")
+                        {
+                                $sqlStr .= " )  ORDER BY original_order_datetime ASC, limit_price ";
+                        }
+
+                }
+
+
 		$self->{SQLSTR} = $sqlStr;
 		carp("$self->{SQLSTR} : SESSIONOBJECTSQL");
 
@@ -68,7 +105,49 @@ sub genSQL
                 $sqlStr   .= " AND limit_price <= " . $requestParms{'maxPrice'}  if ($requestParms{'maxPrice'} || $requestParms{'maxPrice'} eq 0);
                 $sqlStr   .= " AND order_quantity >= " . $requestParms{'minQty'} if ($requestParms{'minQty'} || $requestParms{'minQty'} eq 0);
                 $sqlStr   .= " AND order_quantity <= " . $requestParms{'maxQty'} if ($requestParms{'maxQty'} || $requestParms{'maxQty'} eq 0);
-		$sqlStr   .= " ORDER BY limit_price, order_quantity ";
+
+
+                if ((not defined $requestParms{sort}) || ($requestParms{sort} =~ /^\s*$/))
+                {
+                        $sqlStr .= "  ORDER BY limit_price ASC, order_quantity  ";
+			$self->{SORT} = "SORT_PRICE_ASC";
+                }
+                else
+                {
+
+                        if ($requestParms{sort} eq "SORT_PRICE_DESC")
+                        {
+                                $sqlStr .= "  ORDER BY limit_price DESC, order_quantity ";
+				$self->{SORT} = "SORT_PRICE_DESC";
+                        }
+                        elsif ($requestParms{sort} eq "SORT_PRICE_ASC")
+                        {
+                                $sqlStr .= "  ORDER BY limit_price ASC, order_quantity ";
+				$self->{SORT} = "SORT_PRICE_ASC";
+                        }
+                        elsif ($requestParms{sort} eq "SORT_ORDER_ASC")
+                        {
+                                $sqlStr .= "  ORDER BY order_quantity ASC, limit_price ";
+				$self->{SORT} = "SORT_ORDER_ASC";
+                        }
+                        elsif ($requestParms{sort} eq "SORT_ORDER_DESC")
+                        {
+                                $sqlStr .= "  ORDER BY order_quantity DESC, limit_price ";
+				$self->{SORT} = "SORT_ORDER_DESC";
+                        }
+                        elsif ($requestParms{sort} eq "SORT_DATE_DESC")
+                        {
+                                $sqlStr .= "  ORDER BY original_order_datetime DESC, limit_price ";
+				$self->{SORT} = "SORT_DATE_DESC";
+                        }
+                        elsif ($requestParms{sort} eq "SORT_DATE_ASC")
+                        {
+                                $sqlStr .= "  ORDER BY original_order_datetime ASC, limit_price ";
+				$self->{SORT} = "SORT_DATE_ASC";
+                        }
+
+                }
+
                 $self->{SQLSTR} =  $sqlStr;
 
 		carp ("$self->{SQLSTR} : PARAMETERSQL");
@@ -109,7 +188,7 @@ sub execIndexQuery
 		push @data, @$row;  
 	}
 	
-	return(\@data,$self->{ROWCOUNT});
+	return(\@data,$self->{ROWCOUNT},$self->{SORT});
 }
 
 sub execQuery

@@ -12,6 +12,7 @@ sub new
 	$self->{SESSIONID} = shift;
 	$self->{DATA} = shift;
 	$self->{ROWCOUNT} = shift;
+	$self->{SORT} = shift;
 	bless $self, $class;	
 	return $self; 
 

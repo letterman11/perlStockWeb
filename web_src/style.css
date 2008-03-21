@@ -20,6 +20,13 @@ table.results2  {font-size: 10pt; font-family: arial; border: none;}
 a:visited { color: blue; }
 
 
+
+#p_big_stock { 
+  font-family: arial; 
+  font-size: 24pt; 
+  font-weight: bold;
+}
+
 td {
   min-height: 20px;
 }
@@ -68,6 +75,9 @@ div {
  float: left;
 }
 
+#queryForm {
+}
+
 #sub_left_panel {
   float:left;
 }
@@ -76,5 +86,8 @@ div {
   float: right;
 }
 
+#big_stock {
+clear: left;
 
+}
 
