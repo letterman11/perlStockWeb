@@ -21,6 +21,7 @@ sub display_header
 <div id="main">
         <div id="banner">
          <a href="$::URL_PATHS->{STOCKAPP_HTM}">    <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}">  </a>
+         <a href="$::URL_PATHS->{NEWSITE_HTM}">    <img id="banner_image2" src="$::URL_PATHS->{BANNER_IMAGE2}">  </a>
         </div>
 
         <div id="login" style="visibility:visible">
