@@ -26,6 +26,7 @@ sub display
 <div id="main">
         <div id="banner">
                    <img src="$::URL_PATHS->{BANNER_IMAGE}">
+                   <img src="$::URL_PATHS->{BANNER_IMAGE2}">
         </div>
 
         <div id="login" style="visibility:visible">

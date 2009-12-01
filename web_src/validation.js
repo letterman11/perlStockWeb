@@ -28,7 +28,8 @@ function goSubmit()
 	  + "&minQty=" +handle.frmStockApp.minQty.value + "&maxQty=" +handle.frmStockApp.maxQty.value + "&rowsPerPage=" +handle.frmStockApp.rowsPerPage.value;
 
 //	alert(url);
-	document.getElementById('queryResult').src = url;
+//	document.getElementById('queryResult').src = url;
+        document.getElementById('queryResult').contentWindow.location.replace(url);
    }
 
 }
@@ -73,7 +74,7 @@ function init()
       document.getElementById('logged_on').style.visibility='visible';
       document.getElementById('stockList_container').style.visibility='visible';
       document.getElementById('stockListResult').src = "/cgi-bin/populate_stocklist.cgi";
-      parent.top.document.frmStockApp.rowsPerPage.value = 25;
+      parent.top.document.frmStockApp.rowsPerPage.value = 20;
 
    }  
 }

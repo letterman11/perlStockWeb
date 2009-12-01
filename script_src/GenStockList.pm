@@ -45,7 +45,7 @@ sub display
 		    . "	</head>\n "
 		    . "<body> ";
 
-	for(my $i=0; $i < $i + $rowlen && $i< scalar(@stocklist_array); $i++) 
+	for(my $i=0; $i< scalar(@stocklist_array); $i++) 
 	{
 		$stock_name = $stocklist_array[$i];
 		if(substr($stock_name,0,1) ne substr($old_stock_name,0,1)) 

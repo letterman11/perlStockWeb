@@ -10,8 +10,10 @@
 
 
 $::URL_PATHS =  {
-                       BANNER_IMAGE            => "/~abrooks/DCBANNER_CROP2.jpg",
+                       BANNER_IMAGE            => "/gen_rsrc/DCQUERY2_180_31.jpg",
+                       BANNER_IMAGE2            => "/gen_rsrc/DCBANNER_CROP2_219_31_2.jpg",
                        STOCKAPP_HTM            => "/~abrooks/stockapp.html",
+                       NEWSITE_HTM            => "/new_site/index.html",
                        REGISTRATION_HTM        => "/~abrooks/registration.html",
 		       DIV_UPDATE_PROF_FHM        => "/home/abrooks/www/StockApp/web_src/div_update_profile.fhtm",
                        MAINSTYLE_CSS           => "/~abrooks/style.css",
