@@ -25,8 +25,8 @@ sub display
    $out_buffer = <<"OUT_HTML";
 <div id="main">
         <div id="banner">
-                   <img src="$::URL_PATHS->{BANNER_IMAGE}">
-                   <img src="$::URL_PATHS->{BANNER_IMAGE2}">
+  	 <a  href="/~abrooks/stockapp.html">   <img id="banner_image" src="/gen_rsrc/DCQUERY2_180_31.jpg">  </a>
+  	 <a  href="/dcoda.net/index.html">   <img id="banner_image2" src="/gen_rsrc/DCBANNER_CROP2_219_31_2.jpg">  </a>
         </div>
 
         <div id="login" style="visibility:visible">
