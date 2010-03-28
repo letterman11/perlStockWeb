@@ -2,6 +2,7 @@
 table.results2  {font-size: 10pt; font-family: arial; border: none;}
 .form_login { font-size: 10pt; font-family: arial; background-color: #E3E3E3 }
 .form_register { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; background-color: #E3E3E3 } 
+.form_register_required { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; font-weight: bold; background-color: #E3E3E3 } 
 .form_profile1 { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; background-color: #E3E3E3 } 
 .form_profile2 { margin: 0px; padding: 0px; font-size: 10pt; font-family: arial; background-color: #E3E3E3 } 
 .form_query { font-size: 10pt; font-family: arial; background-color: #E3E3E3 }
@@ -103,4 +104,59 @@ div {
 clear: left;
 
 }
+
+#stockApp_description {
+	margin-top:20px;
+	font-family: arial, courier;
+}
+
+.help_description_container {
+	margin-right:15px;
+	width:300px;
+}
+
+.help_description {
+	width:100%;
+	padding-right:3px;
+}
+
+.help_description h4 {
+	margin:0px;
+	padding:1px;
+	background-color:#D0D0D0;
+/*	border:solid black 1px; */
+}
+
+h4#description_header {
+	font-size: 13pt;
+	background-color:#E8E8E8;
+
+}
+
+.help_description p {
+	font-size: 10pt;
+
+}
+
+#small_help_pane {
+	height:260px;
+	width:612px;
+	background: url(/gen_rsrc/DCQUERY_SNAP1_COMMENT_612_260.gif) no-repeat; 
+}
+
+#large_help_pane { 
+	height:349px;
+	width:845px;
+	background: url(/gen_rsrc/DCQUERY_SNAP1_COMMENT_845_349.gif) no-repeat; 
+}
+
+div#footer {
+        position:absolute;
+        bottom:0px;
+        left:0px;
+        width:100%;
+}
+p.foot {
+        text-align:center;
+}       
 

@@ -69,10 +69,11 @@ function init()
 
   if ((stock_SessionID != null && stock_SessionID != 'null')) {
       document.getElementById('login').style.display='none';
-      document.getElementById('queryForm').style.visibility='visible';
-      document.getElementById('query').style.visibility='visible';
+      document.getElementById('stockApp_description').style.display='none';
+      document.getElementById('queryForm').style.display='block';
+      document.getElementById('query').style.display='block';
       document.getElementById('logged_on').style.visibility='visible';
-      document.getElementById('stockList_container').style.visibility='visible';
+      document.getElementById('stockList_container').style.display='block';
       document.getElementById('stockListResult').src = "/cgi-bin/populate_stocklist.cgi";
       parent.top.document.frmStockApp.rowsPerPage.value = 20;
 

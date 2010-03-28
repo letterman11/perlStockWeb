@@ -75,7 +75,7 @@ sub display
 </div>
 
 <div id="sub_left_panel">
-   <div id="queryForm" style="visibility:hidden">
+   <div id="queryForm" style="display:none">
        <form id="frmStockApp" name="frmStockApp">
         <table class="form_query">
           <tr>
@@ -120,7 +120,44 @@ sub display
 
 </div>
 
- <div id="stockList_container" style="visibility:hidden">
+<div id="stockApp_description">
+   <h4 id="description_header"> DCQuery is a demo stock order lookup application, that interfaces with a database of mock stock orders. <br>
+        The interface is broken down into three components: Criterion Pane, Stock Selection Pane, and Report Pane. <br>
+        To use the application you must register via the link above.
+   </h4>
+
+  <div class="help_description_container">
+   <div class="help_description">
+     <h4> Criterion Pane </h4>
+     <p> Stock orders can be queried and filtered by limit price and quantity, with upper and lower ranges designated for both.  The number of rows returned can be selected via option dialog.
+     </p>
+   </div>
+   <div class="help_description">
+     <h4> Stock Selection Pane </h4>
+     <p>  All available stocks can be chosen from this pane. Once selected it will populate the Criterion Pane and will also be displayed in large bold beneath the Criterion Pane.
+     </p>
+   </div>
+   <div class="help_description">
+     <h4> Report Pane </h4>
+     <p> Orders for a stock are displayed here and can be sorted by either limit price, quantity or date.
+     </p>
+   </div>
+  </div>
+
+   <script language="Javascript" type="text/javascript">
+    if (window.screen.width <= 1024) {
+       document.write( '  <div id="small_help_pane"> ' +
+      ' </div> ');
+
+    } else {
+     document.write( '  <div id="large_help_pane"> ' +
+     ' </div> ');
+   }
+   </script>
+</div>
+
+
+ <div id="stockList_container" style="display:none">
      <iframe id="stockListResult" name="stocklistframe" src="" height= "400"  width="225" frameborder="0" marginheight="0" marginwidth="5" >
      </iframe>
    </div>
