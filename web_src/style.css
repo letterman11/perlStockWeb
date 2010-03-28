@@ -47,13 +47,6 @@ td {
   float:right;
 }
 
-div {
-  display:block;
-  position:relative;
-  float:left;
-  border-style:none; 
-}
-
 #main {
   position:relative;
   width:100%;
@@ -82,7 +75,7 @@ div {
 
 #login {
   float: right;
-  z-index: 100;
+  z-index: 100; 
 }
 
 #query {
@@ -111,6 +104,7 @@ clear: left;
 }
 
 .help_description_container {
+	float:left; 
 	margin-right:15px;
 	width:300px;
 }
@@ -124,13 +118,12 @@ clear: left;
 	margin:0px;
 	padding:1px;
 	background-color:#D0D0D0;
-/*	border:solid black 1px; */
 }
 
 h4#description_header {
-	font-size: 13pt;
+	font-size:0.9em;
+	display:inline-block;
 	background-color:#E8E8E8;
-
 }
 
 .help_description p {
@@ -139,12 +132,14 @@ h4#description_header {
 }
 
 #small_help_pane {
+	float:left;  
 	height:260px;
 	width:612px;
 	background: url(/gen_rsrc/DCQUERY_SNAP1_COMMENT_612_260.gif) no-repeat; 
 }
 
 #large_help_pane { 
+	float:left;  
 	height:349px;
 	width:845px;
 	background: url(/gen_rsrc/DCQUERY_SNAP1_COMMENT_845_349.gif) no-repeat; 
