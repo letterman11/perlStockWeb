@@ -29,7 +29,7 @@ sub display
 </div>
 
 <div id="app_status">
-
+	<br>
 	<span class="text_large"> <p> $errstr </p> </span>
 </div>
 
