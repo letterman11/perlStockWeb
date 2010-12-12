@@ -98,6 +98,11 @@ clear: left;
 
 }
 
+#help_launch {
+	color:blue;
+	margin:0 0 0 25px;
+}
+
 #stockApp_description {
 	margin-top:20px;
 	font-family: arial, courier;
@@ -155,3 +160,12 @@ p.foot {
         text-align:center;
 }       
 
+#curr_page {
+	background-color:#6666FF;
+	color:white;
+}
+
+#app_error {
+	border: solid #0066cc 5px;
+
+}

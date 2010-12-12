@@ -15,8 +15,6 @@ var DIV_INDEX = {
 		A:0, B:2, C:3
 	      };
 
- 
-//var Instance = getCookie('Instance');
 
 function goSubmit()
 {
@@ -27,8 +25,6 @@ function goSubmit()
         url += "stkName=" +escape(handle.frmStockApp.stkName.value) + "&minPrice=" +handle.frmStockApp.minPrice.value + "&maxPrice=" +handle.frmStockApp.maxPrice.value
 	  + "&minQty=" +handle.frmStockApp.minQty.value + "&maxQty=" +handle.frmStockApp.maxQty.value + "&rowsPerPage=" +handle.frmStockApp.rowsPerPage.value;
 
-//	alert(url);
-//	document.getElementById('queryResult').src = url;
         document.getElementById('queryResult').contentWindow.location.replace(url);
    }
 
@@ -60,17 +56,29 @@ function clearFields(handler)
    handle.frmStockApp.rowsPerPage.value="";
 }
 
+function help_page()
+{
+   document.getElementById('login').style.display='none';
+   document.getElementById('stockApp_description').style.display='block';
+   document.getElementById('sub_left_panel').style.display='none';
+   document.getElementById('query').style.display='none';
+   document.getElementById('logged_on').style.visibility='visible';
+   document.getElementById('stockList_container').style.display='none';
+   document.getElementById('stockListResult').src = "/cgi-bin/populate_stocklist.cgi";
+   parent.top.document.frmStockApp.rowsPerPage.value = 20;
+
+
+}
 
 function init()
 {
 
    stock_SessionID = getCookie('stock_SessionID');
-  //alert('stockSessionID ' + stock_SessionID); 
 
   if ((stock_SessionID != null && stock_SessionID != 'null')) {
       document.getElementById('login').style.display='none';
       document.getElementById('stockApp_description').style.display='none';
-      document.getElementById('queryForm').style.display='block';
+      document.getElementById('sub_left_panel').style.display='block';
       document.getElementById('query').style.display='block';
       document.getElementById('logged_on').style.visibility='visible';
       document.getElementById('stockList_container').style.display='block';
@@ -178,19 +186,6 @@ function validateProfile1()
    regForm.phone.value = regForm.phone.value.replace(/\D*/g,"");
    regForm.phone.value = regForm.phone.value.substring(0,phoneLen);
 
-/*
-   var regForm = arguments[0];
-   if (! reEmailValidation.test(regForm.email.value)) {
-        document.getElementById("val_email").style.visibility = "visible";
-        state = false
-   }
-
-   if(regForm.userName.value.length < userLen) {
-        document.getElementById("val_username").style.visibility = "visible";
-        state = false
-   }
-*/
-
    return state;
 }
 
@@ -236,9 +231,6 @@ function setStockField(stock,div)
 	parent.top.document.frmStockApp.stkName.value = stock;
 	parent.top.document.getElementById('p_big_stock').innerHTML = stock;
 	div.style.zIndex = DIV_INDEX.A;	
-//	div.style.zIndex = 0;	
-//	alert(div.style.zIndex);	
-	//alert(DIV_INDEX.charAt(length-1));	
 }
 
 function changeBigStock(form)
@@ -250,6 +242,4 @@ function changeBigStock(form)
 function giveTop(div)
 {
 	div.style.zIndex = 100;
-//	alert(div.style.zIndex);		
-	//return true;
 }
