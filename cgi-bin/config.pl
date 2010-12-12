@@ -10,15 +10,15 @@
 
 
 $::URL_PATHS =  {
-                       BANNER_IMAGE            => "/gen_rsrc/DCQUERY2_180_31.jpg",
-                       BANNER_IMAGE2            => "/gen_rsrc/DCBANNER_CROP2_219_31_2.jpg",
-                       STOCKAPP_HTM            => "/~abrooks/stockapp.html",
+                       BANNER_IMAGE           => "/gen_rsrc/DCQUERY2_180_31.jpg",
+                       BANNER_IMAGE2          => "/gen_rsrc/DCBANNER_CROP2_219_31_2.jpg",
+                       STOCKAPP               => "/stockApp/",
                        NEWSITE_HTM            => "/dcoda.net/index.html",
-                       REGISTRATION_HTM        => "/~abrooks/registration.html",
+                       REGISTRATION_HTM       => "/stockApp/web_src/registration.html",
 		       DIV_UPDATE_PROF_FHM        => "/home/abrooks/www/StockApp/web_src/div_update_profile.fhtm",
-                       MAINSTYLE_CSS           => "/~abrooks/style.css",
-                       VALIDATION_JS           => "/~abrooks/validation.js",
-                       COMMON_JS               => "/~abrooks/common.js",
+                       MAINSTYLE_CSS           => "/stockApp/web_src/style.css",
+                       VALIDATION_JS           => "/stockApp/web_src/validation.js",
+                       COMMON_JS               => "/stockApp/web_src/common.js",
                };
 $::GLOBALS	= {
 			HOST			=> ""

@@ -2,13 +2,12 @@
 
 use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
-use GenStatus;
 use GenError;
 use Error;
 use GenStockList;
 use DbConfig;
 use CGI qw /:standard/;
-use CGI::Carp qw(fatalsToBrowser);
+#use CGI::Carp qw(fatalsToBrowser);
 use DBI;
 require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
 
@@ -20,7 +19,7 @@ my $query = new CGI;
 my $dbconf = DbConfig->new();
 
 my $select_sql_str = "SELECT DISTINCT stock_symbol FROM orders"; 
-carp ("$select_sql_str");
+#carp ("$select_sql_str");
 
 my $dbh = DBI->connect( "dbi:mysql:"
                 . $dbconf->dbName() . ":"
@@ -46,9 +45,9 @@ eval {
 
 };
 
-	GenError->new(Error->new(102))->display("Application Error occurred try again later\n") and die "$@" if ($@);
+	GenError->new(Error->new(102))->display() and die "$@" if ($@);
 
-	carp ("@stocklist_array");
+	#carp ("@stocklist_array");
 	print header;
 	GenStockList->new(\@stocklist_array)->display();
 

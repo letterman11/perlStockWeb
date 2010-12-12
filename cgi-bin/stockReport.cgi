@@ -2,15 +2,11 @@
 
 use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
-use GenView;
-use GenLogin;
 use StockUtil;
 use GenModel;
-use Error;
-use SessionObject;
+use GenReport;
 use CGI qw (:standard);
-use CGI::Carp qw(fatalsToBrowser);
-use Data::Dumper;
+#use CGI::Carp qw(fatalsToBrowser);
 require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
 
 
@@ -27,7 +23,6 @@ if (ref $initSessionObject eq 'SessionObject') {
 
        $sessInst = $initSessionObject->{INSTANCE};
        $sessID =  $initSessionObject->{SESSIONID};
-	#$userID = $cookies{'stock_UserID'}->value;
     
        my $model = GenModel->new(\%params);
     
@@ -47,12 +42,12 @@ if (ref $initSessionObject eq 'SessionObject') {
 
        my $view = GenReport->new($model);
 
-       $view->display2();
+       $view->display();
 
 
 } else {
  
-	GenLogin->new()->display();
+	GenError->new(Error->new(104))->display();
 
 }
 

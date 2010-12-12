@@ -2,14 +2,12 @@
 
 use strict;
 use lib "/home/abrooks/www/StockApp/script_src";
-use GenView;
 use StockUtil;
 use GenModel;
-use Error;
-use SessionObject;
+use GenReport;
+use GenError;
 use CGI qw (:standard);
-use CGI::Carp qw(fatalsToBrowser);
-use Data::Dumper;
+#use CGI::Carp qw(fatalsToBrowser);
 require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
 
 
@@ -22,22 +20,21 @@ my %params = $query->Vars;
 ($callObj) = StockUtil::validateSession();
 
 
-if (ref $callObj eq 'SessionObject') { 
+if (ref $callObj eq 'SessionObject') 
+{ 
   
-	my $model = GenModel->new(\%params);
+   my $model = GenModel->new(\%params);
 
-	$model->genSQL($callObj);
+   $model->genSQL($callObj);
 
-	$model->execQuery(); 
+   $model->execQuery(); 
 
-	my $view = GenReport->new($model);
+   my $view = GenReport->new($model);
 
-	$view->display2();
+   $view->display($query->param('page'));
 
-
-} else {
- 
-	GenLogin->new()->display();
-
+} 
+else 
+{
+    GenError->new(Error->new(104))->display();
 }
-
