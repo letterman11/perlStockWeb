@@ -18,7 +18,7 @@ my $false            = 0;
 
 my %err_codes = ( 
 			101 => "Failed Login",
-			102 => "Database Failure",
+			102 => "Application Failure Try Again Later",
 			103 => "Session Exists",
 			104 => "No Session Exists for ID",
 			105 => "No Object exists for Session",

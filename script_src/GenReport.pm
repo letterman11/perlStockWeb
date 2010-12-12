@@ -26,35 +26,10 @@ sub new
 	return $self;	
 }
 
-
-
 sub display
 {
 	my $self = shift(); 
-	my $buffer_out = ();
-   
-	$buffer_out  = StockUtil::headerHtml();
-	$buffer_out .= "<table class='results' width='100%'  cellspacing='1' cellpadding='1' border='0' align='left' >\n";
-	$buffer_out .= stockHeaderHtml();
-	my  ($i,$alt) = 0;
-	foreach my $row (@{$self->{DATA}}) {
-		my ($ta_number, $firm_symbol, $limit_price, $order_quantity, $order_datetime) = @$row;
-		$alt =  (++$i % 2 ? 1 : 2);
-		$buffer_out .= "<tr class='tbl_num$alt'><td class='tbl_txt'> $ta_number </td> "  
-	 	            .  "<td class='tbl_txt' width=25%> $firm_symbol</td><td> $limit_price </td><td> $order_quantity</td> "
-			    .  "<td> $order_datetime </td></tr>\n";
-
-	} 
-	$buffer_out .= "\n</table>\n";
-	$buffer_out .= "<!-- " . $self->{ROWCOUNT} . " -->"; 
-	
-	$buffer_out .= StockUtil::footerHtml();
-	print $buffer_out;
-}
-
-sub display2
-{
-	my $self = shift(); 
+        my $page = shift();
 	my $buffer_out = ();
    
 	$buffer_out  = StockUtil::headerHtml();
@@ -70,7 +45,7 @@ sub display2
 
 	} 
 	$buffer_out .= "<tr class='results'><td colspan='100%'>";
-	$buffer_out .= $self->genNavigation();
+	$buffer_out .= $self->genNavigation($page);
 	$buffer_out .= "\n </td></tr>\n";
 	$buffer_out .= "\n</table>\n";
 	$buffer_out .= "<!-- " . $self->{ROWCOUNT} . " -->"; 
@@ -83,16 +58,25 @@ sub display2
 sub genNavigation
 {
 	my $self = shift;
+	my $currPage = shift || 0; 
 	my $buffer_out = (); 
 	my $pgCnt = 1;
 	my $currCnt  = 0;
 	my $totRows = $self->{ROWCOUNT};
 	my $rowsPerPage = $self->{ROWSPERPAGE};
 
+
 	if($totRows > $rowsPerPage) {
-		$buffer_out .= "Page(s) ";
+		$buffer_out .= "Pages: ";
 		do {
-			$buffer_out .= " <A HREF=/cgi-bin/stockReportDetail.cgi?page=" . $pgCnt .  "&rowsPerPage=" . $rowsPerPage . ">" .  $pgCnt . "</A> ";
+			if ( $currPage eq $pgCnt ) 
+			{			
+				$buffer_out .= " <span id='curr_page'>  $pgCnt </span>";
+			}
+			else
+			{
+				$buffer_out .= " <A HREF=/stockApp/cgi-bin/stockReportDetail.cgi?page=" . $pgCnt .  "&rowsPerPage=" . $rowsPerPage . ">" .  $pgCnt . "</A> ";
+			}
 			$currCnt += $rowsPerPage;
 			$pgCnt++;
 		}while($currCnt < $totRows);

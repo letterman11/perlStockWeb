@@ -4,8 +4,8 @@ use strict;
 use FileHandle;
 
 $::attr = { 
-		PrintError => 0,
-		RaiseError => 1,
+		PrintError => 1,
+		RaiseError => 0,
 	}; 
 
 sub new

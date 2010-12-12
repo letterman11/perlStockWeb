@@ -1,7 +1,5 @@
 package GenHome;
 
-@ISA = qw(GenView);
-
 use strict;
 use CGI qw /:standard/;
 
@@ -28,54 +26,27 @@ sub display
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML>
   <HEAD>
-    <TITLE>Stock Query Application - Registration </TITLE>
+    <TITLE>Stock Query Application </TITLE>
         <LINK href="$::URL_PATHS->{MAINSTYLE_CSS}" rel="stylesheet" type="text/css">
-        <script language="Javascript" src="$::URL_PATHS->{VALIDATION_JS}"> </script>
         <script language="Javascript" src="$::URL_PATHS->{COMMON_JS}"> </script>
     </HEAD>
 <BODY onload="init()">
 
 <div id="main">
         <div id="banner">
-         <a href="$::URL_PATHS->{STOCKAPP_HTM}">    <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}">  </a>
+         <a href="$::URL_PATHS->{STOCKAPP}">    <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}">  </a>
          <a href="$::URL_PATHS->{NEWSITE_HTM}">    <img id="banner_image2" src="$::URL_PATHS->{BANNER_IMAGE2}">  </a>
-        </div>
-
-        <div id="login" style="visibility:visible">
-          <form name="frmLogin" method="POST" action="../cgi-bin/authenticate.cgi">
-             <table>
-              <tr class="form_login">
-                  <td> user name: </td> <td> <input name="userName" type="text"> </td>
-              </tr>
-              <tr class="form_login">
-                  <td> password:  </td> <td> <input name="userPass" type="password"> </td>
-              </tr>
-              <tr class="form_login">
-                  <td colspan="2"> <input type="submit"> <input type="reset"> </td>
-              </tr>
-              <tr class="form_login">
-                  <td> Not Registered?   Register <a href="$::URL_PATHS->{REGISTRATION_HTM}"> here </a> </td>
-              </tr>
-              </table>
-          </form>
         </div>
 
 	<div id="logged_on" style="visibility:visible">
          <span class="form_login">  
- 	   <script language="Javascript" type="text/javascript">
-	     stock_UserID = getCookie('stock_UserID'); 
-             if(stock_UserID != null && stock_UserID.length > 0) {
-		document.write(stock_UserID + " LOGGED IN | " + 
-	   	" <a href=$::URL_PATHS->{STOCKAPP_HTM} onclick=logOut('stock_UserID','stock_SessionID','Instance') target=_top > LOG OUT </a> " + 
-	   	" | <a href=/cgi-bin/profile_page.cgi?userName=" + stock_UserID + ">" +  " update profile </a> "); 
-	     }
-	  </script>
+	   	 <a href=javascript:init();> app </a> |  <a href=javascript:help_page();> help page </a>  
 	 </span>
 	</div>
 </div>
 
-<div id="sub_left_panel">
-   <div id="queryForm" style="display:none">
+<div id="sub_left_panel" style="display:none">
+   <div id="queryForm">
        <form id="frmStockApp" name="frmStockApp">
         <table class="form_query">
           <tr>

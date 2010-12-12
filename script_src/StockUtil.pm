@@ -2,12 +2,9 @@ package StockUtil;
 
 use strict;
 use Error;
-use GenReport;
-use GenError;
-use SessionObject;
 use CGI::Cookie;
+use SessionObject;
 use Storable;
-use Data::Dumper;
 
 BEGIN
 {
@@ -146,10 +143,10 @@ sub validateSession
         my ($sessionID,$userID)  = ();
 
         my %cookies = fetch CGI::Cookie;
-        return Error->new(104) unless (defined $cookies{'stock_SessionID'} && defined $cookies{'stock_UserID'});
+        return Error->new(104) unless (defined $cookies{'stockSessionID'} && defined $cookies{'stockUserID'});
 
-        $sessionID = $cookies{'stock_SessionID'}->value;
-        $userID = $cookies{'stock_UserID'}->value;
+        $sessionID = $cookies{'stockSessionID'}->value;
+        $userID = $cookies{'stockUserID'}->value;
 
 	return Error->new(104) 	if not -e "/tmp/$sessionID";
 

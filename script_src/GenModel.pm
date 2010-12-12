@@ -2,7 +2,7 @@ package GenModel;
 
 use strict;
 use DBI;
-use GenView;
+use GenError;
 use DbConfig;
 use Data::Dumper;
 use Benchmark;
@@ -46,7 +46,7 @@ sub genSQL
 		}
 		
 
-		carp(Dumper($sessObj));
+		print STDERR (Dumper($sessObj));
 				
 		$data = $sessObj->{DATA}->[$i];
 
@@ -161,7 +161,7 @@ sub execIndexQuery
 	my $dbconf = DbConfig->new();
 	my $dbh	= DBI->connect( "dbi:mysql:" . $dbconf->dbName() . ":" 
 			. $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass(), $::attr )
-				or die "Cannot Connect to Database $DBI::errstr\n";
+				or GenError->new(Error->new(102))->display() and die "Cannot Connect to Database $DBI::errstr\n";
 
 	my $sth = $dbh->prepare($self->{SQLSTR}); 
 	carp("$self->{SQLSTR} : EXECINDEXQUERY" );
@@ -197,7 +197,7 @@ sub execQuery
         my $dbconf = DbConfig->new();
         my $dbh = DBI->connect( "dbi:mysql:" . $dbconf->dbName() . ":"
 	                . $dbconf->dbHost(), $dbconf->dbUser(), $dbconf->dbPass(), $::attr )
-       			         or die "Cannot Connect to Database $DBI::errstr\n";
+       			         or  GenError->new(Error->new(102))->display() and die "Cannot Connect to Database $DBI::errstr\n";
 
         my $sth = $dbh->prepare($self->{SQLSTR});
 

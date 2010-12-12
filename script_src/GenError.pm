@@ -3,7 +3,7 @@ package GenError;
 
 use strict;
 use StockUtil;
-
+use Error;
 
 sub new
 {
@@ -23,25 +23,22 @@ sub display
    $errstr = exists($self->{ERROBJ}) && $self->{ERROBJ}->errText ? $self->{ERROBJ}->errText : $errstr;
 
 
-   print StockUtil::headerHtml();
+   print StockUtil::headerHttp();
    $out_buffer = <<"OUT_HTML";
-<div id="main">
-        <div id="banner">
-                 <a  href="$::URL_PATHS->{STOCKAPP_HTM}">  <img id="banner_image" src="$::URL_PATHS->{BANNER_IMAGE}"> </a>
-        </div>
-</div>
-
+<html>
+<head>
+<title> Error Page </title>
+<link rel="stylesheet" href="$::URL_PATHS->{MAINSTYLE_CSS}" type="text/css">
+</head>
+<body>
 <div id="app_error">
 	<span class="errtext_large"> <p> $errstr </p> </span>
 </div>
-
 </body>
 </html>
 OUT_HTML
    print $out_buffer;
-   StockUtil::footerHtml();
 }
-
 
 
 
