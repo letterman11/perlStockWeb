@@ -1,7 +1,7 @@
 #!/usr/bin/perl -wT
 
 use strict;
-use lib "/home/abrooks/www/StockApp/script_src";
+use lib "/home/abrooks/www/stockApp/script_src";
 use GenError;
 use Error;
 use GenStockList;
@@ -9,7 +9,7 @@ use DbConfig;
 use CGI qw /:standard/;
 #use CGI::Carp qw(fatalsToBrowser);
 use DBI;
-require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
+require '/home/abrooks/www/stockApp/cgi-bin/config.pl';
 
 my $stocklist = ();
 my @stocklist_array;

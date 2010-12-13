@@ -1,7 +1,7 @@
 #!/usr/bin/perl -wT
 
 use strict;
-use lib "/home/abrooks/www/StockApp/script_src";
+use lib "/home/abrooks/www/stockApp/script_src";
 use GenView;
 use GenHome;
 use GenLogin;
@@ -11,14 +11,14 @@ use CGI qw /:standard/;
 use CGI::Cookie;
 use CGI::Carp qw(fatalsToBrowser);
 use DBI;
-require '/home/abrooks/www/StockApp/cgi-bin/config.pl';
+require '/home/abrooks/www/stockApp/cgi-bin/config.pl';
 
 
 
 my $userID = 0;
 my $userName = 1;
 my $userPass = 2;
-my $startpage="/home/abrooks/www/StockApp/web_src/stockapp.html";
+my $startpage="/home/abrooks/www/stockApp/web_src/stockapp.html";
 my $query = new CGI;
 my $host = $::GLOBALS->{HOST}; # !!! change for production server to dcoda.net
 
