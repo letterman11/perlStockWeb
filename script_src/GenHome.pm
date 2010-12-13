@@ -28,6 +28,8 @@ sub display
   <HEAD>
     <TITLE>Stock Query Application </TITLE>
         <LINK href="$::URL_PATHS->{MAINSTYLE_CSS}" rel="stylesheet" type="text/css">
+        <LINK href="$::URL_PATHS->{ICON}" rel="icon">
+        <LINK href="$::URL_PATHS->{ICON_SHORT}" rel="icon">
         <script language="Javascript" src="$::URL_PATHS->{COMMON_JS}"> </script>
     </HEAD>
 <BODY onload="init()">
