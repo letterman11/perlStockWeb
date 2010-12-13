@@ -21,7 +21,7 @@ function init()
       document.getElementById('query').style.display='block';
       document.getElementById('logged_on').style.visibility='visible';
       document.getElementById('stockList_container').style.display='block';
-      document.getElementById('stockListResult').src = "/cgi-bin/populate_stocklist.cgi";
+      document.getElementById('stockListResult').src = "/stockApp/cgi-bin/populate_stocklist.cgi";
       parent.top.document.frmStockApp.rowsPerPage.value = 20;
 
    }
@@ -127,7 +127,7 @@ function help_page()
    document.getElementById('query').style.display='none';
    document.getElementById('logged_on').style.visibility='visible';
    document.getElementById('stockList_container').style.display='none';
-   document.getElementById('stockListResult').src = "/cgi-bin/populate_stocklist.cgi";
+   document.getElementById('stockListResult').src = "/stockApp/cgi-bin/populate_stocklist.cgi";
    parent.top.document.frmStockApp.rowsPerPage.value = 20;
 
 
@@ -144,7 +144,7 @@ function init()
       document.getElementById('query').style.display='block';
       document.getElementById('logged_on').style.visibility='visible';
       document.getElementById('stockList_container').style.display='block';
-      document.getElementById('stockListResult').src = "/cgi-bin/populate_stocklist.cgi";
+      document.getElementById('stockListResult').src = "/stockApp/cgi-bin/populate_stocklist.cgi";
       parent.top.document.frmStockApp.rowsPerPage.value = 20;
 
    }
