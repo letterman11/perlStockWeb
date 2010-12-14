@@ -12,8 +12,8 @@
 $::URL_PATHS =  {
                        BANNER_IMAGE           => "/stockApp/gen_rsrc/DCQUERY2_180_31.jpg",
                        BANNER_IMAGE2          => "/stockApp/gen_rsrc/DCBANNER_CROP2_219_31_2.jpg",
-                       STOCKAPP               => "/stockApp/",
-                       NEWSITE_HTM            => "/dcoda.net/index.html",
+                       STOCKAPP               => "/stockApp",
+                       NEWSITE_HTM            => "/dcoda.net",
                        REGISTRATION_HTM       => "/stockApp/web_src/registration.html",
 		       DIV_UPDATE_PROF_FHM        => "/home/abrooks/www/StockApp/web_src/div_update_profile.fhtm",
                        ICON           		=> "/dcoda.net/gen_rsrc/dc.ico",
